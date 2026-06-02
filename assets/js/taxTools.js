@@ -172,7 +172,7 @@
           form.reportValidity();
           return;
         }
-        // TODO: Connect this validated payload to CRM/email automation or Formspree.
+        // TODO: Connect this validated payload to CRM/email automation.
         form.reset();
         status.className = 'form-status success';
         status.hidden = false;
