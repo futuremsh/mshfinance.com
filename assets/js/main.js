@@ -111,12 +111,6 @@
       return;
     }
 
-    if (form.action.includes('your-form-id')) {
-      statusEl.classList.add('error');
-      statusEl.textContent = 'Launch setup needed: replace the Formspree placeholder endpoint before this form can send.';
-      return;
-    }
-
     statusEl.textContent = 'Sending your message...';
 
     const formData = new FormData(form);
@@ -125,9 +119,9 @@
       const response = await fetch(form.action, {
         method: form.method,
         headers: {
-          Accept: 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: formData
+        body: new URLSearchParams(formData).toString()
       });
 
       if (response.ok) {
