@@ -4,18 +4,11 @@ This is a static website. Launch only the root site files, not the `quickfire-cp
 
 ## 1. Pre-Launch Setup
 
-1. Create a Formspree form at `https://formspree.io`.
-2. Copy the endpoint that looks like `https://formspree.io/f/xxxxxxxx`.
-3. In `contact.html`, replace:
-
-```html
-https://formspree.io/f/your-form-id
-```
-
-with the real endpoint.
-
-4. Submit the contact form once from a local preview and approve/confirm the Formspree email if prompted.
-5. Confirm the contact form delivers to the right inbox.
+1. Confirm Netlify Forms is enabled for the site.
+2. Deploy `contact.html` with the `contact` form markup.
+3. Confirm Netlify detects the `contact` form after the deploy.
+4. Submit one live test inquiry from the contact page.
+5. Confirm the submission appears in Netlify Forms and reaches the right inbox or notification workflow.
 
 ## 2. Local Preview
 
