@@ -1,0 +1,19 @@
+{
+  "taxYear": 2026,
+  "disclaimer": "Disclaimer: This tool is meant to be used for general educational or informational purposes only and not intended as financial, investment or other professional advice. Consult a qualified CPA or tax professional for personal guidance and decision making.",
+  "sourceLinks": [
+    "https://www.irs.gov/publications/p505",
+    "https://www.irs.gov/pub/irs-drop/n-20-75.pdf",
+    "https://www.irs.gov/newsroom/qualified-business-income-deduction",
+    "https://www.tax.ny.gov/bus/ptet/",
+    "https://www.tax.ny.gov/e-services/ptet/calculations.htm",
+    "https://www.tax.ny.gov/e-services/ptet/calculations-city.htm",
+    "https://www.nj.gov/treasury/taxation/baitpte/index.shtml",
+    "https://www.nj.gov/treasury/taxation/baitpte/baitpte-faq.shtml"
+  ],
+  "confidenceReasons": {
+    "high": "Single-owner or simple ownership facts, known sourcing, known QBI posture, and no special allocation/tiered-owner red flags.",
+    "medium": "Some unknowns exist, but no major ownership or sourcing red flags were indicated.",
+    "low": "The estimate depends on facts that usually require CPA review, such as mixed residency, special allocations, tiered owners, or uncertain QBI."
+  }
+}

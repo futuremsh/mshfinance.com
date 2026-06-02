@@ -1,0 +1,23 @@
+{
+  "taxYear": 2026,
+  "source": {
+    "name": "NJ Division of Taxation PTE/BAIT",
+    "url": "https://www.nj.gov/treasury/taxation/baitpte/index.shtml",
+    "faqUrl": "https://www.nj.gov/treasury/taxation/baitpte/baitpte-faq.shtml"
+  },
+  "rateTable": [
+    { "upTo": 250000, "rate": 0.05675 },
+    { "upTo": 1000000, "rate": 0.0652 },
+    { "upTo": null, "rate": 0.109 }
+  ],
+  "paymentSchedule": [
+    { "quarter": "Q1", "due": "April 15" },
+    { "quarter": "Q2", "due": "June 15" },
+    { "quarter": "Q3", "due": "September 15" },
+    { "quarter": "Q4", "due": "January 15 of the following tax year" }
+  ],
+  "baseRules": {
+    "partnership": "Resident individual, estate, and trust members are generally modeled on all income; other members are modeled on NJ-source income.",
+    "s_corp": "S corporation BAIT is modeled on NJ-source income."
+  }
+}

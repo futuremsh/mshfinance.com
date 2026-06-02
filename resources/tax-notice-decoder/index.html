@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IRS, NY, NJ, and NYC Tax Notice Decoder</title>
+  <meta name="description" content="Understand what your tax notice may mean, how urgent it is, and what documents to gather before responding.">
+  <link rel="canonical" href="https://mshfinance.com/resources/tax-notice-decoder/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-tools-page="tax-notice">
+  <header class="site-header"><div class="container nav-wrap"><a class="brand" href="/index.html">MSH <span>Finance Group</span></a><button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button><nav class="nav-links" data-nav-menu aria-label="Primary"><a href="/index.html">Home</a><a href="/services.html">Services</a><a href="/about.html">About</a><a href="/resources/" aria-current="page">Resources</a><a href="/contact.html">Contact</a><a class="btn btn-primary" href="/contact.html">Request a Review</a></nav></div></header>
+  <main>
+    <section class="page-hero section"><div class="container heading reveal"><h1>IRS / NY / NJ Tax Notice Decoder</h1><p>Understand what a notice may relate to, how urgent it appears, and what to gather before responding.</p></div></section>
+    <section class="section-pad section-alt section">
+      <div class="container tool-page-grid">
+        <div>
+          <div class="disclaimer-box reveal"><strong>Do not upload or paste the full notice.</strong> Enter only high-level information. This is triage, not a formal notice response.</div>
+          <form class="tool-panel reveal" data-tool="notice" novalidate>
+            <h2>Notice details</h2>
+            <div class="form-row">
+              <div><label for="agency">Agency</label><select id="agency" name="agency" required><option>IRS</option><option>NYS Department of Taxation and Finance</option><option>NJ Division of Taxation</option><option>NYC Department of Finance</option><option>Other / not sure</option></select></div>
+              <div><label for="notice_code">Notice type or code</label><input id="notice_code" name="notice_code" type="text" maxlength="80" placeholder="Example: CP2000, balance due, audit letter"></div>
+              <div><label for="category">Common category</label><select id="category" name="category" required><option>Balance due</option><option>Missing return</option><option>Proposed adjustment</option><option>Penalty notice</option><option>Audit/examination</option><option>Levy/garnishment/collection</option><option>Identity verification</option><option>Sales tax notice</option><option>Payroll tax notice</option><option>Business tax notice</option><option>Other / not sure</option></select></div>
+              <div><label for="tax_type">Tax type</label><select id="tax_type" name="tax_type" required><option>Individual income tax</option><option>Business income tax</option><option>Sales tax</option><option>Payroll tax</option><option>Corporate tax</option><option>Partnership/S-corp</option><option>Property tax</option><option>Other / not sure</option></select></div>
+              <div><label for="tax_period">Tax year / period</label><input id="tax_period" name="tax_period" type="text" maxlength="40"></div>
+              <div><label for="notice_amount">Amount shown on notice</label><input id="notice_amount" name="notice_amount" type="number" min="0" step="0.01" value="0"></div>
+              <div><label for="deadline_date">Deadline date from notice</label><input id="deadline_date" name="deadline_date" type="date"></div>
+            </div>
+            <h2>Response status</h2>
+            <div class="form-row">
+              <div><label for="already_responded">Have you already responded?</label><select id="already_responded" name="already_responded"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="agree_notice">Do you agree with the notice?</label><select id="agree_notice" name="agree_notice"><option>Not sure</option><option>Yes</option><option>No</option><option>Partially</option></select></div>
+              <div><label for="returns_filed">Were returns filed for that period?</label><select id="returns_filed" name="returns_filed"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+              <div><label for="payment_records">Do you have payment records?</label><select id="payment_records" name="payment_records"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+              <div><label for="collection_language">Collection, levy, or garnishment language?</label><select id="collection_language" name="collection_language"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="audit_language">Audit or examination language?</label><select id="audit_language" name="audit_language"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+            </div>
+            <button class="btn btn-primary" type="submit">Decode Notice Urgency</button>
+          </form>
+          <div id="notice-output"></div>
+        </div>
+        <aside>
+          <div class="side-panel reveal"><h2>Who this is for</h2><ul class="outcome-list"><li>Individuals who received IRS/NYS/NJ/NYC notices.</li><li>Business owners with tax notices.</li><li>Businesses with sales or payroll tax notices.</li></ul></div>
+          <div class="side-panel reveal"><h2>Common mistakes we see</h2><ul class="outcome-list"><li>Ignoring the deadline.</li><li>Paying automatically without understanding the issue.</li><li>Responding without payment or filing records.</li><li>Waiting too long when collection language appears.</li></ul></div>
+          <div data-lead-capture-container data-default-issue="Tax notice or controversy"></div>
+        </aside>
+      </div>
+    </section>
+    <section class="section-pad section"><div class="container faq-grid"><details><summary>Should I ignore a notice if I think it is wrong?</summary><p>No. Preserve the deadline and verify the facts before responding.</p></details><details><summary>What if the deadline is soon?</summary><p>A deadline within 14 days deserves urgent review.</p></details><details><summary>What if I cannot pay the full balance?</summary><p>Do not ignore it. Payment options and dispute options depend on the facts.</p></details><details><summary>What if the notice is for sales or payroll tax?</summary><p>Those categories can escalate quickly and should be reviewed promptly.</p></details></div></section>
+  </main>
+  <script src="/assets/js/main.js" defer></script><script src="/assets/js/toolsFramework.js" defer></script><script src="/assets/js/taxToolsConfig.js" defer></script><script src="/assets/js/taxTools.js" defer></script>
+</body>
+</html>

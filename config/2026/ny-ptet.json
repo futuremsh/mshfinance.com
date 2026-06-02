@@ -1,0 +1,19 @@
+{
+  "taxYear": 2026,
+  "source": {
+    "name": "New York State PTET calculations",
+    "url": "https://www.tax.ny.gov/e-services/ptet/calculations.htm",
+    "notes": "Rates and worksheet mechanics should be confirmed before each tax season."
+  },
+  "rateTable": [
+    { "upTo": 2000000, "base": 0, "over": 0, "rate": 0.0685 },
+    { "upTo": 5000000, "base": 137000, "over": 2000000, "rate": 0.0965 },
+    { "upTo": 25000000, "base": 426500, "over": 5000000, "rate": 0.103 },
+    { "upTo": null, "base": 2486500, "over": 25000000, "rate": 0.109 }
+  ],
+  "notes": [
+    "Partnerships may require resident and nonresident pools.",
+    "Special allocations and guaranteed payments can change the calculation.",
+    "Tiered ownership can make quick-mode estimates low confidence."
+  ]
+}

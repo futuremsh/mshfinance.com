@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PTET / BAIT Results | 2026 Estimator</title>
+  <meta name="description" content="View your 2026 PTET and NJ BAIT screening results, confidence score, complexity meter, and next steps.">
+  <link rel="canonical" href="https://mshfinance.com/ptet/results/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PTET / BAIT Estimator Results">
+  <meta property="og:description" content="Core results shown on-screen without email gating, with optional report package request.">
+  <meta property="og:url" content="https://mshfinance.com/ptet/results/">
+  <meta property="og:image" content="https://mshfinance.com/assets/images/mshlandinglogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-tools-page="ptet-results-2026">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/index.html">MSH <span>Finance Group</span></a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links" data-nav-menu aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/resources/" aria-current="page">Resources</a>
+        <a href="/contact.html">Contact</a>
+        <a class="btn btn-primary" href="/contact.html?tool=ptet-results-2026">Schedule a Consult</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section">
+      <div class="container heading reveal">
+        <span class="tool-header-mini">Tax Year 2026 - Results</span>
+        <h1>Your PTET / BAIT Screening Results</h1>
+        <p>Core results are visible here with no email required. Use the report package form only if you want a branded takeaway sent later after email integration is connected.</p>
+      </div>
+    </section>
+
+    <section class="section-pad section-alt section">
+      <div class="container tool-page-grid">
+        <div>
+          <div class="disclaimer-box reveal">
+            <strong>Educational estimate only.</strong> This is a screening tool, not a final tax recommendation. The right answer depends on your facts, books, entity structure, owner residency, sourcing, and timing.
+          </div>
+          <div data-ptet-results aria-live="polite"></div>
+
+          <section class="report-package reveal">
+            <h2>Email me my report package</h2>
+            <p>Optional soft gate. On-screen results stay visible either way. The package is designed to include a PDF summary, CPA questions checklist, assumptions, and sensitivity notes once email delivery is connected.</p>
+            <form data-report-package novalidate>
+              <div class="form-row">
+                <div>
+                  <label for="report_email">Email</label>
+                  <input id="report_email" name="email" type="email" placeholder="you@example.com" required>
+                </div>
+              </div>
+              <label class="checkbox-row">
+                <input name="reportConsent" type="checkbox" required>
+                Send me my report by email.
+              </label>
+              <label class="checkbox-row">
+                <input name="marketingConsent" type="checkbox">
+                Send me occasional NYC/NJ tax tips. Unsubscribe anytime.
+              </label>
+              <p class="small">We do not sell your data. We send 1 email with your report. Optional tips only if you opt in.</p>
+              <button class="btn btn-primary" type="submit">Email me the report package</button>
+              <div class="form-status" data-report-status role="status" aria-live="polite" hidden></div>
+            </form>
+          </section>
+        </div>
+
+        <aside>
+          <div class="side-panel reveal">
+            <h2>Deadlines and payment cadence</h2>
+            <p>Election and payment rules change. Treat these as general planning prompts and confirm current-year deadlines before acting.</p>
+            <ul class="outcome-list">
+              <li>NY PTET and NYC PTET require annual election and payment review.</li>
+              <li>NJ BAIT payments are generally reviewed around quarterly estimated payment dates.</li>
+              <li>Cash flow matters because entity-level tax payments can affect operating liquidity.</li>
+            </ul>
+          </div>
+          <div class="side-panel reveal">
+            <h2>What to gather before a consult</h2>
+            <ul class="outcome-list">
+              <li>Prior-year entity tax return.</li>
+              <li>Current-year P&amp;L and balance sheet.</li>
+              <li>Owner residency details.</li>
+              <li>K-1s and ownership agreement.</li>
+              <li>Prior PTET/BAIT filings and estimated payments.</li>
+            </ul>
+          </div>
+          <div class="side-panel reveal">
+            <h2>Request a callback</h2>
+            <p>Use the contact form and include only a short note. Do not include SSNs, EINs, bank info, or confidential documents.</p>
+            <a class="btn btn-secondary" href="/contact.html?tool=ptet-callback">Request a Callback</a>
+          </div>
+          <div data-lead-capture-container data-default-issue="PTET / NJ BAIT planning"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p><strong>MSH Finance Group LLC</strong></p>
+        <p class="small">Advisory and consulting firm led by Morris Shalom, CPA.</p>
+        <p class="small">MSH Finance Group LLC is not a registered CPA firm.</p>
+        <p class="small">© 2026 MSH Finance Group LLC. All rights reserved.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/ptet/">Quick Mode</a>
+        <a href="/ptet/advanced/">Advanced Mode</a>
+        <a href="/ptet/learn/">Learn</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/toolsFramework.js" defer></script>
+  <script src="/assets/js/taxToolsConfig.js" defer></script>
+  <script src="/assets/js/taxTools.js" defer></script>
+  <script src="/assets/js/ptetEstimator.js" defer></script>
+</body>
+</html>

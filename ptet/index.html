@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PTET / BAIT Election Estimator 2026 | NY, NYC, and NJ</title>
+  <meta name="description" content="Estimate whether NY PTET, NYC PTET, or NJ BAIT may be worth reviewing for a partnership or S-corporation in tax year 2026.">
+  <link rel="canonical" href="https://mshfinance.com/ptet/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PTET / BAIT Election Estimator 2026">
+  <meta property="og:description" content="A plain-English estimator for NY, NYC, and NJ pass-through entity tax planning.">
+  <meta property="og:url" content="https://mshfinance.com/ptet/">
+  <meta property="og:image" content="https://mshfinance.com/assets/images/mshlandinglogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-tools-page="ptet-quick-2026">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/index.html">MSH <span>Finance Group</span></a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links" data-nav-menu aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/resources/" aria-current="page">Resources</a>
+        <a href="/contact.html">Contact</a>
+        <a class="btn btn-primary" href="/contact.html?tool=ptet-2026">Schedule a Consult</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section">
+      <div class="container heading reveal">
+        <span class="tool-header-mini">Tax Year 2026 - Quick Mode</span>
+        <h1>PTET / BAIT Election Estimator</h1>
+        <p>This quick estimator helps NY, NYC, and NJ owners screen whether PTET or NJ BAIT may be worth a CPA review. Core results appear on-screen with no email required.</p>
+        <div class="tool-mode-nav">
+          <a class="btn btn-primary" href="/ptet/">Quick Mode</a>
+          <a class="btn btn-secondary" href="/ptet/advanced/">Advanced Mode</a>
+          <a class="btn btn-secondary" href="/ptet/learn/">Learn the Basics</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad section-alt section">
+      <div class="container tool-page-grid">
+        <form class="wizard-shell" data-ptet-wizard="quick" novalidate>
+          <section class="wizard-step reveal">
+            <span class="step-kicker">Step 1 of 6</span>
+            <h2>You</h2>
+            <span class="inline-disclaimer">Educational estimate only — not tax advice.</span>
+            <div class="form-row">
+              <div>
+                <label for="filing_status">Federal filing status</label>
+                <select id="filing_status" name="filing_status" required>
+                  <option value="single">Single</option>
+                  <option value="married_filing_jointly">Married filing jointly</option>
+                  <option value="married_filing_separately">Married filing separately</option>
+                  <option value="head_of_household">Head of household</option>
+                </select>
+              </div>
+              <div>
+                <label for="nyc_resident">NYC resident?</label>
+                <select id="nyc_resident" name="nyc_resident" required>
+                  <option value="no">No</option>
+                  <option value="full_year">Full-year</option>
+                  <option value="part_year">Part-year</option>
+                </select>
+              </div>
+              <div>
+                <label for="nys_resident">NYS resident?</label>
+                <select id="nys_resident" name="nys_resident" required>
+                  <option value="full_year">Full-year</option>
+                  <option value="part_year">Part-year</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div>
+                <label for="nj_resident">NJ resident?</label>
+                <select id="nj_resident" name="nj_resident" required>
+                  <option value="no">No</option>
+                  <option value="full_year">Full-year</option>
+                  <option value="part_year">Part-year</option>
+                </select>
+              </div>
+              <div>
+                <label for="magi_bucket">Approximate MAGI range</label>
+                <select id="magi_bucket" name="magi_bucket" required>
+                  <option value="under_250">&lt; $250k</option>
+                  <option value="250_500">$250k - $500k</option>
+                  <option value="500_650">$500k - $650k</option>
+                  <option value="650_1m">$650k - $1M</option>
+                  <option value="over_1m">$1M+</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <section class="wizard-step reveal">
+            <span class="step-kicker">Step 2 of 6</span>
+            <h2>Income</h2>
+            <span class="inline-disclaimer">Educational estimate only — not tax advice.</span>
+            <p class="input-hint">Use rough annual estimates. Do not enter SSNs, EINs, account numbers, or confidential details.</p>
+            <div class="form-row">
+              <div><label for="wages">Wages, user plus spouse</label><input id="wages" name="wages" type="number" min="0" step="1000" value="0"></div>
+              <div><label for="investment_income">Investment income</label><input id="investment_income" name="investment_income" type="number" min="0" step="1000" value="0"></div>
+              <div><label for="other_income">Other income</label><input id="other_income" name="other_income" type="number" min="0" step="1000" value="0"></div>
+            </div>
+          </section>
+
+          <section class="wizard-step reveal">
+            <span class="step-kicker">Step 3 of 6</span>
+            <h2>Deductions</h2>
+            <span class="inline-disclaimer">Educational estimate only — not tax advice.</span>
+            <div class="form-row">
+              <div><label for="property_tax">Property tax paid personally</label><input id="property_tax" name="property_tax" type="number" min="0" step="100" value="0"></div>
+              <div><label for="personal_salt">State/local income taxes paid personally</label><input id="personal_salt" name="personal_salt" type="number" min="0" step="100" value="0"></div>
+              <div><label for="mortgage_interest">Mortgage interest</label><input id="mortgage_interest" name="mortgage_interest" type="number" min="0" step="100" value="0"></div>
+              <div><label for="charity">Charitable contributions</label><input id="charity" name="charity" type="number" min="0" step="100" value="0"></div>
+            </div>
+          </section>
+
+          <section class="wizard-step reveal">
+            <span class="step-kicker">Step 4 of 6</span>
+            <h2>Entities</h2>
+            <span class="inline-disclaimer">Educational estimate only — not tax advice.</span>
+            <p class="input-hint">Add up to five partnerships or S-corps. If ownership is complicated, use Advanced Mode after this screen.</p>
+            <div class="form-row">
+              <div><label for="entity_count">Number of entities</label><input id="entity_count" data-entity-count name="entity_count" type="number" min="1" max="5" step="1" value="1"></div>
+            </div>
+            <div data-ptet-entities></div>
+          </section>
+
+          <section class="wizard-step reveal">
+            <span class="step-kicker">Step 5 of 6</span>
+            <h2>QBI and complexity</h2>
+            <span class="inline-disclaimer">Educational estimate only — not tax advice.</span>
+            <div class="form-row">
+              <div>
+                <label for="qbi">Do you usually get the 20% QBI deduction?</label>
+                <select id="qbi" name="qbi" required>
+                  <option value="not_sure">Not sure</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div>
+                <label for="sstb">Is the business a specified service business?</label>
+                <select id="sstb" name="sstb" required>
+                  <option value="not_sure">Not sure</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <section class="wizard-step reveal">
+            <span class="step-kicker">Step 6 of 6</span>
+            <h2>Get your screen</h2>
+            <span class="inline-disclaimer">Educational estimate only — not tax advice.</span>
+            <p>Results show a recommendation badge, savings range, confidence score, complexity meter, and items that could change the answer. No email is required for core results.</p>
+            <button class="btn btn-primary" type="submit">Estimate PTET / BAIT Opportunity</button>
+          </section>
+        </form>
+
+        <aside>
+          <div class="side-panel reveal">
+            <h2>Who this is for</h2>
+            <ul class="outcome-list">
+              <li>NY/NJ partnerships and S-corps.</li>
+              <li>Profitable owner-operated businesses.</li>
+              <li>Owners affected by the federal SALT cap.</li>
+              <li>Businesses with books current enough for planning.</li>
+            </ul>
+          </div>
+          <div class="side-panel reveal">
+            <h2>What to gather</h2>
+            <ul class="outcome-list">
+              <li>Prior-year entity return and K-1s.</li>
+              <li>Current-year P&amp;L.</li>
+              <li>Owner residency information.</li>
+              <li>Estimated tax payments.</li>
+              <li>Prior PTET or BAIT filings, if any.</li>
+            </ul>
+          </div>
+          <div class="side-panel reveal">
+            <h2>Common mistakes</h2>
+            <ul class="outcome-list">
+              <li>Waiting until books are too stale to estimate income.</li>
+              <li>Ignoring owner residency and sourcing.</li>
+              <li>Making an election without cash-flow planning.</li>
+              <li>Treating a screening estimate as final tax advice.</li>
+            </ul>
+          </div>
+          <div data-lead-capture-container data-default-issue="PTET / NJ BAIT planning"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p><strong>MSH Finance Group LLC</strong></p>
+        <p class="small">Advisory and consulting firm led by Morris Shalom, CPA.</p>
+        <p class="small">MSH Finance Group LLC is not a registered CPA firm.</p>
+        <p class="small">© 2026 MSH Finance Group LLC. All rights reserved.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/services.html">Services</a>
+        <a href="/resources/">Resources</a>
+        <a href="/ptet/learn/">PTET Guide</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/toolsFramework.js" defer></script>
+  <script src="/assets/js/taxToolsConfig.js" defer></script>
+  <script src="/assets/js/taxTools.js" defer></script>
+  <script src="/assets/js/ptetEstimator.js" defer></script>
+</body>
+</html>

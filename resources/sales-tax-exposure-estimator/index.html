@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NY/NJ Sales Tax Exposure Estimator</title>
+  <meta name="description" content="Estimate possible sales tax exposure, identify red flags, and understand what to gather before a sales tax cleanup review.">
+  <link rel="canonical" href="https://mshfinance.com/resources/sales-tax-exposure-estimator/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-tools-page="sales-tax">
+  <header class="site-header"><div class="container nav-wrap"><a class="brand" href="/index.html">MSH <span>Finance Group</span></a><button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button><nav class="nav-links" data-nav-menu aria-label="Primary"><a href="/index.html">Home</a><a href="/services.html">Services</a><a href="/about.html">About</a><a href="/resources/" aria-current="page">Resources</a><a href="/contact.html">Contact</a><a class="btn btn-primary" href="/contact.html">Request a Review</a></nav></div></header>
+  <main>
+    <section class="page-hero section"><div class="container heading reveal"><h1>Sales Tax Exposure Estimator</h1><p>Estimate rough sales tax non-compliance exposure and identify cleanup urgency for NY/NJ businesses.</p></div></section>
+    <section class="section-pad section-alt section">
+      <div class="container tool-page-grid">
+        <div>
+          <div class="disclaimer-box reveal"><strong>Illustrative estimate only.</strong> Sales tax rates, filing rules, penalties, interest, and marketplace treatment vary. This tool does not calculate actual agency liability.</div>
+          <form class="tool-panel reveal" data-tool="sales-tax" novalidate>
+            <h2>Sales and filing facts</h2>
+            <div class="form-row">
+              <div><label for="business_type">Business type</label><select id="business_type" name="business_type" required><option>Retail</option><option>Restaurant / food service</option><option>Salon / personal care</option><option>Contractor / trade</option><option>E-commerce</option><option>Professional services</option><option>Digital products/software</option><option>Other</option></select></div>
+              <div><label for="jurisdiction">Jurisdiction</label><select id="jurisdiction" name="jurisdiction" required><option>NY</option><option>NYC</option><option>NJ</option><option>NY + NJ</option><option>Multi-state</option></select></div>
+              <div><label for="monthly_sales">Approximate monthly gross sales</label><input id="monthly_sales" name="monthly_sales" type="number" min="0" step="0.01" required></div>
+              <div><label for="taxable_percent">Approximate percent of sales that may be taxable</label><input id="taxable_percent" name="taxable_percent" type="number" min="0" max="100" step="0.1" required></div>
+              <div><label for="sales_tax_rate">Approximate sales tax rate for estimate (%)</label><input id="sales_tax_rate" name="sales_tax_rate" type="number" min="0" max="15" step="0.001" value="8.875" required><p class="input-hint">Editable placeholder. One rate does not apply everywhere.</p></div>
+              <div><label for="noncompliance_months">Months of potential non-compliance</label><input id="noncompliance_months" name="noncompliance_months" type="number" min="0" step="1" required></div>
+            </div>
+            <h2>Risk indicators</h2>
+            <div class="form-row">
+              <div><label for="returns_filed">Were returns filed?</label><select id="returns_filed" name="returns_filed"><option>Yes, but may be wrong</option><option>No</option><option>Not sure</option></select></div>
+              <div><label for="tax_collected">Was sales tax collected from customers?</label><select id="tax_collected" name="tax_collected"><option>No</option><option>Yes</option><option>Sometimes</option><option>Not sure</option></select></div>
+              <div><label for="sales_tax_payable">Sales tax payable balance sitting in books?</label><select id="sales_tax_payable" name="sales_tax_payable"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="notices_received">Agency notices received?</label><select id="notices_received" name="notices_received"><option>None</option><option>IRS</option><option>NYS</option><option>NYC</option><option>NJ</option><option>Not sure</option></select></div>
+              <div><label for="marketplace_sales">Marketplace sales involved?</label><select id="marketplace_sales" name="marketplace_sales"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="exempt_customers">Exempt customers / resale certificates?</label><select id="exempt_customers" name="exempt_customers"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="multi_state_sales">Multi-state sales?</label><select id="multi_state_sales" name="multi_state_sales"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+            </div>
+            <button class="btn btn-primary" type="submit">Estimate Exposure</button>
+          </form>
+          <div id="sales-tax-output"></div>
+        </div>
+        <aside>
+          <div class="side-panel reveal"><h2>Who this is for</h2><ul class="outcome-list"><li>Retailers, restaurants, cafes, salons, and contractors.</li><li>E-commerce and marketplace sellers.</li><li>Businesses that collected tax but may not have remitted it.</li><li>Businesses unsure what sales are taxable.</li></ul></div>
+          <div class="side-panel reveal"><h2>Common mistakes we see</h2><ul class="outcome-list"><li>Assuming software set up tax correctly.</li><li>Ignoring stale sales tax payable balances.</li><li>Not keeping resale certificates.</li><li>Letting multi-state sales go unreviewed.</li></ul></div>
+          <div data-lead-capture-container data-default-issue="Sales tax compliance"></div>
+        </aside>
+      </div>
+    </section>
+    <section class="section-pad section"><div class="container faq-grid"><details><summary>What if I collected sales tax but did not remit it?</summary><p>That can become serious quickly. Quantify the exposure and get advice before guessing.</p></details><details><summary>What if I never registered?</summary><p>Registration and cleanup options depend on facts, periods, jurisdictions, and whether notices have arrived.</p></details><details><summary>Can I fix sales tax issues before an audit?</summary><p>Often the first step is quantifying the issue and building a cleanup plan.</p></details><details><summary>Why does QuickBooks sales tax payable matter?</summary><p>A stale payable balance may indicate collected tax that has not been reconciled or remitted.</p></details></div></section>
+  </main>
+  <script src="/assets/js/main.js" defer></script><script src="/assets/js/toolsFramework.js" defer></script><script src="/assets/js/taxToolsConfig.js" defer></script><script src="/assets/js/taxTools.js" defer></script>
+</body>
+</html>

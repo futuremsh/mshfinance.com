@@ -1,0 +1,17 @@
+.DS_Store
+
+# Local/accidental project folders that are not part of the MSH static site.
+quickfire-cpa/
+MSH FG/
+
+# Root source/export artifact; active logo lives in assets/images/.
+/mshlandinglogo.png
+
+# Local dependency and build output folders.
+node_modules/
+.netlify/
+dist/
+build/
+
+# Generated Netlify upload artifacts.
+deploy-*.zip

@@ -1,0 +1,14 @@
+{
+  "taxYear": 2026,
+  "source": {
+    "name": "NYC PTET calculations",
+    "url": "https://www.tax.ny.gov/e-services/ptet/calculations-city.htm",
+    "notes": "NYC PTET generally applies to NYC PTE taxable income flowing to city taxpayers."
+  },
+  "rate": 0.03876,
+  "eligibilityNotes": [
+    "City resident S corporations use the New York State resident S corporation PTET base as the NYC base.",
+    "City partnerships compute NYC PTE taxable income for city resident partners or members.",
+    "City residency classification and eligible taxpayer status should be reviewed."
+  ]
+}

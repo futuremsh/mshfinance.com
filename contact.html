@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | MSH Finance Group</title>
+  <meta name="description" content="Contact MSH Finance Group for NYC and New Jersey tax planning, bookkeeping, cash-flow, and advisory support.">
+  <link rel="canonical" href="https://mshfinance.com/contact.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contact | MSH Finance Group">
+  <meta property="og:description" content="Start a conversation about your financial priorities.">
+  <meta property="og:url" content="https://mshfinance.com/contact.html">
+  <meta property="og:image" content="https://mshfinance.com/assets/images/mshlandinglogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/index.html">MSH <span>Finance Group</span></a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links" data-nav-menu aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/resources/">Resources</a>
+        <a href="/contact.html" aria-current="page">Contact</a>
+        <a class="btn btn-primary" href="/contact.html">Request a Review</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section">
+      <div class="container heading reveal">
+        <h1>Request a NYC/NJ financial review</h1>
+        <p>Share your worker, resident, or owner-operator situation and we will follow up with the right next step.</p>
+      </div>
+    </section>
+
+    <section class="section-pad section-alt section">
+      <div class="container contact-grid">
+        <article class="card reveal">
+          <h2>Contact form</h2>
+          <p class="small">Use this form for NYC and New Jersey tax, bookkeeping, cash-flow, and planning questions.</p>
+          <form
+            data-contact-form
+            action="https://formspree.io/f/your-form-id"
+            method="POST"
+            novalidate
+          >
+            <input type="hidden" name="_subject" value="New MSH Finance Group website inquiry">
+            <div class="form-row">
+              <div>
+                <label for="name">Full name *</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div>
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div>
+                <label for="location">Location *</label>
+                <select id="location" name="location" required>
+                  <option value="">Select one</option>
+                  <option value="nyc">NYC resident / worker</option>
+                  <option value="nj">New Jersey resident / worker</option>
+                  <option value="ny_nj_business">NY/NJ business owner</option>
+                </select>
+              </div>
+              <div>
+                <label for="client_type">I am a *</label>
+                <select id="client_type" name="client_type" required>
+                  <option value="">Select one</option>
+                  <option value="worker">Worker / employee</option>
+                  <option value="resident">Resident / household</option>
+                  <option value="owner_operator">Owner-operator / business owner</option>
+                  <option value="other">Other NY/NJ situation</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div>
+                <label for="company">Company</label>
+                <input id="company" name="company" type="text" autocomplete="organization">
+              </div>
+              <div>
+                <label for="service_interest">Service interest *</label>
+                <select id="service_interest" name="service_interest" required>
+                  <option value="">Select one</option>
+                  <option value="cfo">Fractional CFO / Controller</option>
+                  <option value="bookkeeping">Bookkeeping</option>
+                  <option value="tax">Tax Compliance &amp; Planning</option>
+                  <option value="tax_notice">Tax Notice / Controversy</option>
+                  <option value="sales_tax">Sales Tax Compliance</option>
+                  <option value="ptet_bait">PTET / NJ BAIT Review</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div>
+                <label for="preferred_contact">Preferred contact method</label>
+                <select id="preferred_contact" name="preferred_contact">
+                  <option value="">No preference</option>
+                  <option value="email">Email</option>
+                  <option value="phone">Phone</option>
+                </select>
+              </div>
+              <div>
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel">
+              </div>
+            </div>
+
+            <label for="message">How can we help? *</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <div data-form-status class="form-status" role="status" aria-live="polite" hidden></div>
+          </form>
+        </article>
+
+        <aside class="card reveal">
+          <h2>Service region</h2>
+          <p>Focused on NYC and New Jersey workers, residents, and owner-operators.</p>
+          <h3>Email</h3>
+          <p><a href="mailto:info@mshfinance.com">info@mshfinance.com</a></p>
+          <h3>What to expect</h3>
+          <ul class="outcome-list">
+            <li>Initial response with next steps.</li>
+            <li>Short review to confirm fit.</li>
+            <li>Recommended engagement structure.</li>
+          </ul>
+          <div class="lead-box">
+            Compliance note: MSH Finance Group LLC is not a registered CPA firm. Advisory and consulting services are led by Morris Shalom, CPA.
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p><strong>MSH Finance Group LLC</strong></p>
+        <p class="small">Advisory and consulting firm led by Morris Shalom, CPA.</p>
+        <p class="small">MSH Finance Group LLC is not a registered CPA firm.</p>
+        <p class="small">© 2026 MSH Finance Group LLC. All rights reserved.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/resources/">Resources</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

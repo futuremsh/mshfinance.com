@@ -1,0 +1,58 @@
+{
+  "taxYear": 2026,
+  "source": {
+    "name": "IRS Publication 505 (2026)",
+    "url": "https://www.irs.gov/publications/p505",
+    "notes": "SALT cap and 2026 tax rate schedules should be reviewed annually before launch."
+  },
+  "saltCap": {
+    "single": { "cap": 40400, "phaseoutStartMAGI": 505000, "floor": 10000, "reductionRate": 0.3 },
+    "head_of_household": { "cap": 40400, "phaseoutStartMAGI": 505000, "floor": 10000, "reductionRate": 0.3 },
+    "married_filing_jointly": { "cap": 40400, "phaseoutStartMAGI": 505000, "floor": 10000, "reductionRate": 0.3 },
+    "married_filing_separately": { "cap": 20200, "phaseoutStartMAGI": 252500, "floor": 5000, "reductionRate": 0.3 }
+  },
+  "standardDeduction": {
+    "single": 16100,
+    "head_of_household": 24150,
+    "married_filing_jointly": 32200,
+    "married_filing_separately": 16100
+  },
+  "taxSchedules": {
+    "single": [
+      { "over": 0, "baseTax": 0, "rate": 0.1 },
+      { "over": 12400, "baseTax": 1240, "rate": 0.12 },
+      { "over": 50400, "baseTax": 5800, "rate": 0.22 },
+      { "over": 105700, "baseTax": 17966, "rate": 0.24 },
+      { "over": 201775, "baseTax": 41024, "rate": 0.32 },
+      { "over": 256225, "baseTax": 58448, "rate": 0.35 },
+      { "over": 640600, "baseTax": 192979.25, "rate": 0.37 }
+    ],
+    "head_of_household": [
+      { "over": 0, "baseTax": 0, "rate": 0.1 },
+      { "over": 17700, "baseTax": 1770, "rate": 0.12 },
+      { "over": 67450, "baseTax": 7740, "rate": 0.22 },
+      { "over": 105700, "baseTax": 16155, "rate": 0.24 },
+      { "over": 201750, "baseTax": 39207, "rate": 0.32 },
+      { "over": 256200, "baseTax": 56631, "rate": 0.35 },
+      { "over": 640600, "baseTax": 191171, "rate": 0.37 }
+    ],
+    "married_filing_jointly": [
+      { "over": 0, "baseTax": 0, "rate": 0.1 },
+      { "over": 24800, "baseTax": 2480, "rate": 0.12 },
+      { "over": 100800, "baseTax": 11600, "rate": 0.22 },
+      { "over": 211400, "baseTax": 35932, "rate": 0.24 },
+      { "over": 403550, "baseTax": 82048, "rate": 0.32 },
+      { "over": 512450, "baseTax": 116896, "rate": 0.35 },
+      { "over": 768700, "baseTax": 206583.5, "rate": 0.37 }
+    ],
+    "married_filing_separately": [
+      { "over": 0, "baseTax": 0, "rate": 0.1 },
+      { "over": 12400, "baseTax": 1240, "rate": 0.12 },
+      { "over": 50400, "baseTax": 5800, "rate": 0.22 },
+      { "over": 105700, "baseTax": 17966, "rate": 0.24 },
+      { "over": 201775, "baseTax": 41024, "rate": 0.32 },
+      { "over": 256225, "baseTax": 58448, "rate": 0.35 },
+      { "over": 384350, "baseTax": 103291.75, "rate": 0.37 }
+    ]
+  }
+}

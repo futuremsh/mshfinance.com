@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>S-Corp Election Calculator for NY and NJ Business Owners</title>
+  <meta name="description" content="Estimate whether an S-corp election may be worth reviewing for your LLC or small business, including added compliance costs and reasonable compensation concerns.">
+  <link rel="canonical" href="https://mshfinance.com/resources/s-corp-election-calculator/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-tools-page="s-corp-election">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/index.html">MSH <span>Finance Group</span></a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links" data-nav-menu aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/resources/" aria-current="page">Resources</a>
+        <a href="/contact.html">Contact</a>
+        <a class="btn btn-primary" href="/contact.html">Request a Review</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section">
+      <div class="container heading reveal">
+        <h1>S-Corp Election Savings Calculator</h1>
+        <p>Screen whether an S-corp election may be worth reviewing after reasonable compensation, payroll, bookkeeping, and NY/NJ complexity are considered.</p>
+      </div>
+    </section>
+
+    <section class="section-pad section-alt section">
+      <div class="container tool-page-grid">
+        <div>
+          <div class="disclaimer-box reveal">
+            <strong>Screening tool only.</strong> This does not recommend an election. S-corp status can create payroll, tax filing, bookkeeping, and legal complexity.
+          </div>
+          <form class="tool-panel reveal" data-tool="s-corp" novalidate>
+            <h2>Business facts</h2>
+            <div class="form-row">
+              <div>
+                <label for="business_location">Business location</label>
+                <select id="business_location" name="business_location" required>
+                  <option>NYC</option>
+                  <option>NY outside NYC</option>
+                  <option>NJ</option>
+                  <option>NY + NJ</option>
+                  <option>Other / multi-state</option>
+                </select>
+              </div>
+              <div>
+                <label for="entity_type">Current entity type</label>
+                <select id="entity_type" name="entity_type" required>
+                  <option>Sole proprietorship</option>
+                  <option>Single-member LLC</option>
+                  <option>Multi-member LLC</option>
+                  <option>Partnership</option>
+                  <option>C corporation</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+              <div>
+                <label for="net_profit">Estimated annual net business profit before owner compensation</label>
+                <input id="net_profit" name="net_profit" type="number" min="0" step="0.01" required>
+              </div>
+              <div>
+                <label for="owner_salary">Estimated reasonable owner salary</label>
+                <input id="owner_salary" name="owner_salary" type="number" min="0" step="0.01" required>
+              </div>
+              <div>
+                <label for="payroll_tax_rate">Payroll tax rate assumption (%)</label>
+                <input id="payroll_tax_rate" name="payroll_tax_rate" type="number" min="0" max="30" step="0.1" value="15.3" required>
+              </div>
+              <div>
+                <label for="self_employment_tax_rate">Self-employment tax rate assumption (%)</label>
+                <input id="self_employment_tax_rate" name="self_employment_tax_rate" type="number" min="0" max="30" step="0.1" value="15.3" required>
+              </div>
+            </div>
+
+            <h2>Estimated added annual compliance cost</h2>
+            <div class="form-row">
+              <div><label for="payroll_provider_cost">Payroll provider</label><input id="payroll_provider_cost" name="payroll_provider_cost" type="number" min="0" step="0.01" value="1200"></div>
+              <div><label for="s_corp_return_cost">S-corp tax return</label><input id="s_corp_return_cost" name="s_corp_return_cost" type="number" min="0" step="0.01" value="1800"></div>
+              <div><label for="bookkeeping_cleanup_cost">Bookkeeping cleanup</label><input id="bookkeeping_cleanup_cost" name="bookkeeping_cleanup_cost" type="number" min="0" step="0.01" value="750"></div>
+              <div><label for="state_filing_cost">State filing costs</label><input id="state_filing_cost" name="state_filing_cost" type="number" min="0" step="0.01" value="500"></div>
+              <div><label for="advisory_cost">Advisory cost</label><input id="advisory_cost" name="advisory_cost" type="number" min="0" step="0.01" value="1000"></div>
+              <div><label for="owner_count">Number of owners</label><input id="owner_count" name="owner_count" type="number" min="1" step="1" value="1"></div>
+            </div>
+
+            <h2>Readiness questions</h2>
+            <div class="form-row">
+              <div><label for="owner_active">Owner works actively in business?</label><select id="owner_active" name="owner_active"><option>Yes</option><option>No</option><option>Partially</option></select></div>
+              <div><label for="has_employees">Business has employees?</label><select id="has_employees" name="has_employees"><option>No</option><option>Yes</option></select></div>
+              <div><label for="clean_books">Business has clean books?</label><select id="clean_books" name="clean_books"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+              <div><label for="retirement_planning">Need retirement plan planning?</label><select id="retirement_planning" name="retirement_planning"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="owner_draws">Regular owner draws/distributions?</label><select id="owner_draws" name="owner_draws"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+            </div>
+            <button class="btn btn-primary" type="submit">Calculate Screening Estimate</button>
+          </form>
+          <div id="s-corp-output"></div>
+        </div>
+        <aside>
+          <div class="side-panel reveal">
+            <h2>Who this is for</h2>
+            <ul class="outcome-list"><li>Profitable LLC owners.</li><li>Consultants, agencies, and professional service businesses.</li><li>NY/NJ owners considering entity planning.</li></ul>
+          </div>
+          <div class="side-panel reveal">
+            <h2>Common mistakes we see</h2>
+            <ul class="outcome-list"><li>Focusing only on estimated savings.</li><li>Skipping reasonable compensation analysis.</li><li>Underestimating compliance costs.</li><li>Making elections with messy books.</li></ul>
+          </div>
+          <div data-lead-capture-container data-default-issue="S-Corp election review"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-pad section">
+      <div class="container faq-grid">
+        <details><summary>When does an S-corp election make sense?</summary><p>It may be worth reviewing when profit is high enough that potential payroll tax savings exceed added complexity and costs.</p></details>
+        <details><summary>What is reasonable compensation?</summary><p>It is the salary an owner-employee should receive for services performed. It depends on facts and should be reviewed professionally.</p></details>
+        <details><summary>Does an S-corp always save taxes?</summary><p>No. Added costs, salary, bookkeeping, retirement planning, and state/local treatment can change the result.</p></details>
+        <details><summary>Do NY, NYC, and NJ change the analysis?</summary><p>They may. State and city treatment should be reviewed before acting.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/toolsFramework.js" defer></script>
+  <script src="/assets/js/taxToolsConfig.js" defer></script>
+  <script src="/assets/js/taxTools.js" defer></script>
+</body>
+</html>

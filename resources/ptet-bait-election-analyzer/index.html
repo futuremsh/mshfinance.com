@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NY PTET and NJ BAIT Election Analyzer</title>
+  <meta name="description" content="Screen whether your partnership or S-corporation should review NY PTET, NYC PTET, or NJ BAIT planning with a tax professional.">
+  <link rel="canonical" href="https://mshfinance.com/resources/ptet-bait-election-analyzer/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-tools-page="ptet-bait">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/index.html">MSH <span>Finance Group</span></a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links" data-nav-menu aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/resources/" aria-current="page">Resources</a>
+        <a href="/contact.html">Contact</a>
+        <a class="btn btn-primary" href="/contact.html">Request a Review</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section">
+      <div class="container heading reveal">
+        <h1>PTET / NJ BAIT Election Analyzer</h1>
+        <p>Screen whether NY PTET, NYC PTET, or NJ BAIT may deserve review for your partnership, S-corporation, or multi-member LLC.</p>
+      </div>
+    </section>
+
+    <section class="section-pad section-alt section">
+      <div class="container tool-page-grid">
+        <div>
+          <div class="disclaimer-box reveal">
+            <strong>Screening tool only.</strong> This does not determine eligibility or recommend an election. Annual election rules, deadlines, owner treatment, and state payment mechanics must be confirmed.
+          </div>
+          <form class="tool-panel reveal" data-tool="ptet-bait" novalidate>
+            <h2>Entity and state profile</h2>
+            <div class="form-row">
+              <div><label for="entity_type">Entity type</label><select id="entity_type" name="entity_type" required><option>Partnership</option><option>Multi-member LLC taxed as partnership</option><option>S-corporation</option><option>Single-member LLC</option><option>Sole proprietorship</option><option>C corporation</option><option>Not sure</option></select></div>
+              <div><label for="state_connection">State connection</label><select id="state_connection" name="state_connection" required><option>NY</option><option>NYC</option><option>NJ</option><option>NY + NJ</option><option>Multi-state</option></select></div>
+              <div><label for="owner_count">Number of owners</label><input id="owner_count" name="owner_count" type="number" min="1" step="1" value="1" required></div>
+              <div><label for="entity_income">Estimated entity taxable income</label><input id="entity_income" name="entity_income" type="number" min="0" step="0.01" required></div>
+              <div><label for="ny_income">Estimated NY-source income</label><input id="ny_income" name="ny_income" type="number" min="0" step="0.01" value="0"></div>
+              <div><label for="nyc_income">Estimated NYC-source or NYC resident owner income</label><input id="nyc_income" name="nyc_income" type="number" min="0" step="0.01" value="0"></div>
+              <div><label for="nj_income">Estimated NJ-source income</label><input id="nj_income" name="nj_income" type="number" min="0" step="0.01" value="0"></div>
+              <div><label for="deadline_date">Election/payment deadline you are tracking</label><input id="deadline_date" name="deadline_date" type="date"></div>
+            </div>
+
+            <h2>Owner and process questions</h2>
+            <div class="form-row">
+              <div><label for="has_nyc_owners">Any NYC resident owners?</label><select id="has_nyc_owners" name="has_nyc_owners"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="has_ny_owners">Any NY resident owners?</label><select id="has_ny_owners" name="has_ny_owners"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="has_nj_owners">Any NJ resident owners?</label><select id="has_nj_owners" name="has_nj_owners"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="has_nonresident_owners">Nonresident owners?</label><select id="has_nonresident_owners" name="has_nonresident_owners"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="prior_elections">Made PTET/BAIT elections before?</label><select id="prior_elections" name="prior_elections"><option>No</option><option>Yes</option><option>Not sure</option></select></div>
+              <div><label for="quarterly_estimates">Does the entity make quarterly estimates?</label><select id="quarterly_estimates" name="quarterly_estimates"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+              <div><label for="books_current">Books current enough to estimate income?</label><select id="books_current" name="books_current"><option>Yes</option><option>No</option><option>Not sure</option></select></div>
+              <div><label for="cash_flow_concern">Cash flow concern</label><select id="cash_flow_concern" name="cash_flow_concern"><option>No issue</option><option>Somewhat tight</option><option>Very tight</option><option>Not sure</option></select></div>
+            </div>
+            <button class="btn btn-primary" type="submit">Analyze Election Review Priority</button>
+          </form>
+          <div id="ptet-output"></div>
+        </div>
+        <aside>
+          <div class="side-panel reveal">
+            <h2>Who this is for</h2>
+            <ul class="outcome-list"><li>Partnerships and S-corps.</li><li>Multi-member LLCs taxed as partnerships.</li><li>Profitable businesses with NY/NJ owners.</li><li>Owners affected by the federal SALT limitation.</li></ul>
+          </div>
+          <div class="side-panel reveal">
+            <h2>Common mistakes we see</h2>
+            <ul class="outcome-list"><li>Missing annual election timing.</li><li>Reviewing PTET without owner residency facts.</li><li>Making payments without cash-flow planning.</li><li>Trying to decide with stale books.</li></ul>
+          </div>
+          <div data-lead-capture-container data-default-issue="PTET / NJ BAIT planning"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-pad section">
+      <div class="container faq-grid">
+        <details><summary>What is PTET?</summary><p>PTET generally refers to pass-through entity tax regimes that may affect entity and owner-level tax planning. Rules must be confirmed for the current year.</p></details>
+        <details><summary>What is NJ BAIT?</summary><p>NJ BAIT is New Jersey's pass-through business alternative income tax regime. It should be reviewed with entity facts and owner facts together.</p></details>
+        <details><summary>Does every S-corp or partnership benefit?</summary><p>No. Entity type, income, owners, estimates, cash flow, and state rules all matter.</p></details>
+        <details><summary>Why do deadlines matter?</summary><p>Election and payment timing can affect whether the planning is available or practical for a given year.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/toolsFramework.js" defer></script>
+  <script src="/assets/js/taxToolsConfig.js" defer></script>
+  <script src="/assets/js/taxTools.js" defer></script>
+</body>
+</html>
