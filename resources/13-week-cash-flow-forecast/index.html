@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>13-Week Cash Flow Forecast Tool for Small Businesses</title>
+  <meta name="description" content="Estimate weekly cash flow, identify short-term cash gaps, and prepare for payroll, taxes, vendor payments, and debt obligations.">
+  <link rel="canonical" href="https://mshfinance.com/resources/13-week-cash-flow-forecast/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body data-tools-page="cash-flow-forecast">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/index.html">MSH <span>Finance Group</span></a>
+      <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+      <nav class="nav-links" data-nav-menu aria-label="Primary">
+        <a href="/index.html">Home</a>
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/resources/" aria-current="page">Resources</a>
+        <a href="/contact.html">Contact</a>
+        <a class="btn btn-primary" href="/contact.html">Request a Review</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero section">
+      <div class="container heading reveal">
+        <h1>13-Week Cash Flow Forecast Tool</h1>
+        <p>Estimate weekly cash visibility, cash gaps, reserve pressure, payroll timing, taxes, vendor payments, debt obligations, and owner draws.</p>
+      </div>
+    </section>
+
+    <section class="section-pad section-alt section">
+      <div class="container tool-page-grid">
+        <div>
+          <div class="disclaimer-box reveal">
+            <strong>Screening tool only.</strong> Do not enter bank account numbers, login credentials, or confidential documents. This tool is educational and does not replace a CFO or accounting review.
+          </div>
+
+          <form class="tool-panel reveal" data-tool="cash-flow" novalidate>
+            <h2>Section A: Starting cash</h2>
+            <div class="form-row">
+              <div>
+                <label for="current_bank_balance">Current bank balance</label>
+                <input id="current_bank_balance" name="current_bank_balance" type="number" min="0" step="0.01" required>
+              </div>
+              <div>
+                <label for="minimum_reserve">Minimum desired cash reserve</label>
+                <input id="minimum_reserve" name="minimum_reserve" type="number" min="0" step="0.01" required>
+              </div>
+              <div>
+                <label for="undeposited_funds">Current undeposited funds</label>
+                <input id="undeposited_funds" name="undeposited_funds" type="number" min="0" step="0.01" value="0">
+              </div>
+              <div>
+                <label for="available_loc">Available line of credit</label>
+                <input id="available_loc" name="available_loc" type="number" min="0" step="0.01" value="0">
+              </div>
+            </div>
+
+            <h2>Section B: Business context</h2>
+            <div class="form-row">
+              <div>
+                <label for="business_type">Business type</label>
+                <select id="business_type" name="business_type" required>
+                  <option>Service business</option>
+                  <option>Agency</option>
+                  <option>Retail</option>
+                  <option>Restaurant</option>
+                  <option>Construction / trade</option>
+                  <option>Professional services</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label for="payroll_frequency">Payroll frequency</label>
+                <select id="payroll_frequency" name="payroll_frequency" required>
+                  <option>Weekly</option>
+                  <option>Biweekly</option>
+                  <option>Semimonthly</option>
+                  <option>Monthly</option>
+                  <option>No payroll</option>
+                </select>
+              </div>
+              <div>
+                <label for="collection_cycle">Main collection cycle</label>
+                <select id="collection_cycle" name="collection_cycle" required>
+                  <option>Upfront</option>
+                  <option>Net 15</option>
+                  <option>Net 30</option>
+                  <option>Net 60+</option>
+                  <option>Milestone/project-based</option>
+                </select>
+              </div>
+              <div>
+                <label for="biggest_concern">Biggest current concern</label>
+                <select id="biggest_concern" name="biggest_concern" required>
+                  <option>Payroll</option>
+                  <option>Vendor pressure</option>
+                  <option>Taxes</option>
+                  <option>Debt payments</option>
+                  <option>Low cash</option>
+                  <option>Unclear AR collection</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <h2>Sections C and D: 13-week inflows and outflows</h2>
+            <p class="input-hint">Enter only amounts you can reasonably estimate. Leave unknown categories as zero and update the forecast weekly.</p>
+            <div class="weekly-grid" data-weekly-grid></div>
+
+            <button class="btn btn-primary" type="submit">Calculate Forecast</button>
+          </form>
+          <div id="cash-flow-output"></div>
+        </div>
+
+        <aside>
+          <div class="side-panel reveal">
+            <h2>Who this is for</h2>
+            <ul class="outcome-list">
+              <li>Businesses with payroll pressure.</li>
+              <li>Companies with AR/AP timing issues.</li>
+              <li>Owners without a CFO or strong internal finance function.</li>
+              <li>Businesses balancing debt payments, taxes, and owner draws.</li>
+            </ul>
+          </div>
+          <div class="side-panel reveal">
+            <h2>Common mistakes we see</h2>
+            <ul class="outcome-list">
+              <li>Forecasting monthly when payroll moves weekly.</li>
+              <li>Ignoring tax reserves.</li>
+              <li>Counting AR before collections are realistic.</li>
+              <li>Letting owner draws compete with operating cash.</li>
+            </ul>
+          </div>
+          <div data-lead-capture-container data-default-issue="Cash flow or forecasting"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section-pad section">
+      <div class="container faq-grid">
+        <details><summary>Why use a 13-week cash flow forecast?</summary><p>It is short enough to update weekly and long enough to see payroll, tax, vendor, and debt pressure before it becomes urgent.</p></details>
+        <details><summary>How often should I update it?</summary><p>Weekly is best for businesses with tight cash, recurring payroll, or active AR/AP timing issues.</p></details>
+        <details><summary>What if collections are unpredictable?</summary><p>Use conservative assumptions and update the model as collections become more certain.</p></details>
+        <details><summary>Can this replace a CFO?</summary><p>No. It is a screening and planning tool, not a replacement for advisory judgment.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/toolsFramework.js" defer></script>
+  <script src="/assets/js/taxToolsConfig.js" defer></script>
+  <script src="/assets/js/taxTools.js" defer></script>
+</body>
+</html>
