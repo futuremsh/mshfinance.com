@@ -1,6 +1,6 @@
-# MSH Finance Group Website
+# MSH Finance Group LLC Website
 
-Static website for MSH Finance Group at `mshfinance.com`.
+Static website for MSH Finance Group LLC at `mshfinance.com`.
 
 ## Deploy
 
@@ -14,10 +14,4 @@ The deploy intentionally excludes `quickfire-cpa/`, `MSH FG/`, local system file
 
 ## Launch Note
 
-Before relying on the contact form in production, replace the placeholder Formspree endpoint in `contact.html`:
-
-```html
-https://formspree.io/f/your-form-id
-```
-
-The current JavaScript blocks placeholder submissions and shows a setup-needed message.
+The contact form is configured for Netlify Forms. After deploying, confirm Netlify has detected the `contact` form and submit one live test message.
