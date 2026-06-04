@@ -8,3 +8,5 @@ MSH FG/
 node_modules/
 .git/
 .netlify/
+*.zip
+zi*
