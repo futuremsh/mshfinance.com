@@ -1,12 +1,12 @@
 (function () {
   const DISCLAIMER =
-    'Disclaimer: This tool is meant to be used for general educational or informational purposes only and not intended as financial, investment or other professional advice. Consult a qualified CPA or tax professional for personal guidance and decision making.';
+    'For educational and screening purposes only. These tools do not constitute legal, tax, accounting, or financial advice and do not create a CPA-client relationship. Review any results with a qualified professional before taking action.';
 
   function buildEmailSignup(source) {
     return (
       '<form class="tool-email-signup" data-tools-email-signup novalidate>' +
       '<label>Email list option<input name="email" type="email" placeholder="you@example.com" required></label>' +
-      '<label class="checkbox-row"><input name="marketingConsent" type="checkbox"> Send me occasional NYC/NJ tax tips. Unsubscribe anytime.</label>' +
+      '<label class="checkbox-row"><input name="marketingConsent" type="checkbox"> Send me occasional NY and NJ tax tips. Unsubscribe anytime.</label>' +
       '<button class="btn btn-secondary" type="submit">Join Email List</button>' +
       '<p class="small">No spam. Unsubscribe anytime. We do not sell your data.</p>' +
       '<input type="hidden" name="source" value="' +
@@ -28,8 +28,8 @@
 
     const sticky = document.createElement('a');
     sticky.className = 'sticky-consult-cta';
-    sticky.href = '/contact.html?tool=' + encodeURIComponent(page);
-    sticky.textContent = 'Schedule a consult';
+    sticky.href = '/contact';
+    sticky.textContent = 'Talk to a CPA';
     document.body.appendChild(sticky);
 
     const footer = document.createElement('section');
@@ -38,9 +38,7 @@
       '<div class="container split">' +
       '<div><h2>Need a professional read?</h2><p>' +
       DISCLAIMER +
-      '</p><div class="cta-strip"><a class="btn btn-primary" href="/contact.html?tool=' +
-      encodeURIComponent(page) +
-      '">Schedule a consult</a></div></div>' +
+      '</p><div class="cta-strip"><a class="btn btn-primary" href="/contact">Talk to a CPA</a></div></div>' +
       '<div>' +
       buildEmailSignup(page) +
       '</div>' +

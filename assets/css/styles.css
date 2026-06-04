@@ -16,6 +16,7 @@
   --shadow: 0 12px 30px rgba(13, 32, 61, 0.12);
   --container: 1140px;
   --header-h: 78px;
+  --logo-box-w: clamp(176px, 20vw, 250px);
 }
 
 * {
@@ -112,34 +113,48 @@ main > section {
   z-index: 30;
   backdrop-filter: blur(10px);
   background: rgba(242, 245, 249, 0.85);
-  border-bottom: 1px solid rgba(212, 221, 235, 0.9);
+  border-bottom: 3px solid var(--brand);
 }
 
 .nav-wrap {
+  position: relative;
   min-height: var(--header-h);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
 }
 
 .brand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   flex: 0 0 auto;
+  width: var(--logo-box-w);
+  height: calc(var(--header-h) * 2);
   font-family: "Libre Baskerville", Georgia, serif;
   font-weight: 700;
   text-decoration: none;
   color: var(--brand);
   font-size: 1.1rem;
   letter-spacing: 0.015em;
+  overflow: hidden;
+  padding: clamp(0.2rem, 0.55vw, 0.42rem);
+  background: #fff;
+  border: 3px solid var(--brand);
+  box-shadow: 0 18px 36px rgba(13, 32, 61, 0.16);
 }
 
 .brand img {
-  width: clamp(138px, 15vw, 190px);
-  max-height: 54px;
+  width: 116%;
+  max-height: calc((var(--header-h) * 2) - 0.55rem);
   height: auto;
   object-fit: contain;
+  transform: scale(1.12);
 }
 
 .brand span {
@@ -230,35 +245,39 @@ main > section {
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(3rem, 7vw, 6rem) 0 2.5rem;
+  padding: clamp(5rem, 8vw, 7.4rem) 0 clamp(2.8rem, 5vw, 4.4rem);
   background:
-    linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.68)),
-    url("/assets/images/mshlandinglogo.png") right 8% center / min(42vw, 520px) auto no-repeat;
+    linear-gradient(90deg, rgba(255,255,255,0.94), rgba(255,255,255,0.72)),
+    linear-gradient(135deg, rgba(16, 46, 91, 0.07), rgba(16, 185, 129, 0.05));
 }
 
 .hero::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  height: 5px;
-  background: linear-gradient(90deg, var(--brand), var(--accent-2), var(--accent), var(--brand-2));
-  animation: signalSlide 6s linear infinite;
-  background-size: 220% 100%;
+  content: none;
 }
 
 .hero-grid {
   display: grid;
-  gap: 2.4rem;
-  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4.6rem);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 410px);
   align-items: center;
 }
 
 .hero-kicker {
+  display: inline-block;
   font-weight: 700;
   color: var(--brand-2);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.82rem;
+}
+
+.hero-kicker em {
+  font-style: italic;
+}
+
+.hero-copy h1 {
+  max-width: 15ch;
+  font-size: clamp(2.45rem, 4.6vw, 3.9rem);
 }
 
 .hero p {
@@ -273,57 +292,15 @@ main > section {
   margin: 1.2rem 0;
 }
 
-.hero-points {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-top: 1.2rem;
-}
-
-.hero-points .pill {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0.65rem 0.7rem;
-  font-weight: 600;
-  color: var(--ink);
-}
-
 .hero-card {
+  justify-self: end;
+  width: min(100%, 410px);
   background: linear-gradient(150deg, #0d2b52 0%, #184875 58%, #0f766e 100%);
   color: #fff;
-  padding: 1.4rem;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-}
-
-.signal-list {
-  display: grid;
-  gap: 0.55rem;
-  margin-top: 1rem;
-}
-
-.signal-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.7rem;
-  align-items: center;
-  padding: 0.65rem;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.12);
+  padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.signal-row span {
-  color: #dbeafe;
-}
-
-.signal-row strong {
-  color: #fff;
-}
-
-.signal-row:nth-child(2) {
-  animation: softPulse 3.8s ease-in-out infinite;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
 }
 
 .tool-marquee {
@@ -348,7 +325,7 @@ main > section {
 }
 
 .hero-card .logo {
-  width: min(100%, 330px);
+  width: 100%;
   height: auto;
   margin-bottom: 1rem;
 }
@@ -357,23 +334,51 @@ main > section {
   color: #dbeafe;
 }
 
-.metric-grid {
+.question-rotator {
+  position: relative;
+  min-height: 138px;
   margin-top: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(219, 234, 254, 0.15);
+}
+
+.question-item {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 1rem;
+  color: #e9f2ff;
+  font-weight: 800;
+  line-height: 1.38;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.48s ease, transform 0.48s ease;
+}
+
+.question-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.question-card-cta {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.6rem;
+  justify-items: start;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
-.metric {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 10px;
-  padding: 0.65rem;
+.question-card-cta p {
+  margin: 0;
+  color: #fff;
+  font-weight: 800;
 }
 
-.metric strong {
-  display: block;
-  font-size: 1.1rem;
+.question-card-cta .btn {
+  box-shadow: none;
 }
 
 .section-pad {
@@ -414,6 +419,81 @@ main > section {
   font-weight: 700;
   font-size: 0.78rem;
   margin-bottom: 0.72rem;
+}
+
+.services-overview {
+  background: #fff;
+}
+
+.service-lane-head {
+  max-width: 760px;
+  margin-bottom: 2.35rem;
+}
+
+.service-lane-head h2 {
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+}
+
+.service-lanes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.service-lane {
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.2rem, 2.4vw, 2.1rem);
+  border-left: 1px solid var(--line);
+  transition: background 0.24s ease;
+}
+
+.service-lane:first-child {
+  border-left: 0;
+}
+
+.service-lane:hover {
+  background: #f7fbff;
+}
+
+.lane-num {
+  color: var(--accent);
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+
+.service-lane h3 {
+  margin: 1.2rem 0 0.9rem;
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+}
+
+.service-lane p {
+  color: var(--ink-muted);
+}
+
+.service-lane .outcome-list {
+  margin-top: 1.25rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.service-lane .outcome-list li {
+  position: relative;
+  margin: 0;
+  padding: 0.58rem 0 0.58rem 1.35rem;
+  border-top: 1px solid #e5ebf3;
+}
+
+.service-lane .outcome-list li::before {
+  content: "";
+  position: absolute;
+  top: 1.02rem;
+  left: 0.15rem;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  transform: rotate(45deg);
 }
 
 .outcome-list {
@@ -537,8 +617,23 @@ main > section {
   padding: 3.1rem 0 2.2rem;
 }
 
+.services-hero,
+.logo-clear-hero {
+  padding-top: calc(var(--header-h) + 2.1rem);
+}
+
+.services-hero h1,
+.logo-clear-hero h1 {
+  max-width: 100%;
+}
+
 .page-hero .heading {
   max-width: 72ch;
+}
+
+.services-hero .heading,
+.logo-clear-hero .heading {
+  max-width: 86ch;
 }
 
 .badges {
@@ -1197,6 +1292,20 @@ textarea {
     grid-template-columns: 1fr 1fr;
   }
 
+  .service-lanes {
+    grid-template-columns: 1fr;
+  }
+
+  .service-lane,
+  .service-lane:first-child {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .service-lane:first-child {
+    border-top: 0;
+  }
+
   .hero-grid {
     align-items: start;
   }
@@ -1205,6 +1314,7 @@ textarea {
 @media (max-width: 780px) {
   :root {
     --header-h: 68px;
+    --logo-box-w: clamp(132px, 38vw, 172px);
   }
 
   h1 {
@@ -1221,6 +1331,10 @@ textarea {
 
   .nav-toggle {
     display: inline-flex;
+  }
+
+  .brand {
+    padding: 0.18rem;
   }
 
   .nav-links {
@@ -1255,9 +1369,24 @@ textarea {
   .split,
   .form-row,
   .weekly-input-grid,
-  .metric-grid,
-  .hero-points {
+  .service-lanes {
     grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: clamp(6.8rem, 26vw, 8.2rem);
+  }
+
+  .hero-copy h1 {
+    max-width: 100%;
+  }
+
+  .hero-card {
+    justify-self: stretch;
+  }
+
+  .question-rotator {
+    min-height: 148px;
   }
 
   .footer-grid {

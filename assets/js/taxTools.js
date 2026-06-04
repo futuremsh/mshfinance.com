@@ -149,17 +149,17 @@
         '<div><label for="lead_email">Email *</label><input id="lead_email" name="email" type="email" autocomplete="email" required></div>' +
         '</div>' +
         '<div class="form-row">' +
-        '<div><label for="lead_phone">Phone</label><input id="lead_phone" name="phone" type="tel" autocomplete="tel"></div>' +
+        '' +
         '<div><label for="lead_business">Business name</label><input id="lead_business" name="business_name" type="text" autocomplete="organization"></div>' +
         '</div>' +
         '<div class="form-row">' +
-        '<div><label for="lead_state">State / region *</label><select id="lead_state" name="state" required><option value="">Select one</option><option>NYC</option><option>NY</option><option>NJ</option><option>NY + NJ</option><option>Multi-state</option><option>Other</option></select></div>' +
+        '<div><label for="lead_state">State / region *</label><select id="lead_state" name="state" required><option value="">Select one</option><option>NYC</option><option>NY</option><option>NJ</option><option>NY and NJ</option><option>Multi-state</option><option>Other</option></select></div>' +
         '<div><label for="lead_issue">What best describes your issue? *</label><select id="lead_issue" name="issue" required><option value="">Select one</option>' +
         issueOptions +
         '</select></div>' +
         '</div>' +
         '<label class="checkbox-row"><input name="consent" type="checkbox" required> I understand this tool is educational and does not create a CPA-client relationship.</label>' +
-        '<button class="btn btn-primary" type="submit">Request Consultation</button>' +
+        '<button class="btn btn-primary" type="submit">Talk to a CPA</button>' +
         '<div class="form-status" data-lead-status role="status" aria-live="polite" hidden></div>' +
         '</form>';
     });
@@ -349,7 +349,7 @@
           checklist(['Build or update the weekly cash process.', 'Reconcile AR/AP and verify collection timing.', 'Review payroll, debt, tax, and owner distribution timing.']) +
           '<h3>What to gather before speaking with us</h3>' +
           checklist(['Current bank balances.', 'AR aging and AP aging.', 'Payroll schedule.', 'Upcoming tax, debt, rent, and vendor obligations.']),
-        ctaHref: '/contact.html?tool=cash-flow',
+        ctaHref: '/contact',
         ctaLabel: config.cta.cashFlow
       });
     });
@@ -392,7 +392,7 @@
         'Owner salary must be reasonable for the services performed.',
         'Payroll setup and a separate business return are generally part of S-corp administration.',
         'Bookkeeping must be clean enough to track salary, distributions, basis, and reimbursements.',
-        'NYC/NYS/NJ treatment can complicate the analysis.'
+        'NY and NJ treatment can complicate the analysis.'
       ];
       if (data.clean_books !== 'Yes') warnings.push('Messy or uncertain books increase implementation risk.');
       if (data.owner_active !== 'Yes') warnings.push('Owner involvement affects the reasonable compensation conversation.');
@@ -420,7 +420,7 @@
           '<p class="assumption-note">' +
           config.assumptions.sCorp.breakEvenNote +
           '</p>',
-        ctaHref: '/contact.html?tool=s-corp',
+        ctaHref: '/contact',
         ctaLabel: config.cta.sCorp
       });
     });
@@ -443,7 +443,7 @@
 
       if (['Partnership', 'Multi-member LLC taxed as partnership', 'S-corporation'].includes(data.entity_type)) score += 25;
       if (income > 0) score += income >= config.assumptions.ptetBait.highIncomeMarker ? 20 : 10;
-      if (['NY', 'NYC', 'NJ', 'NY + NJ', 'Multi-state'].includes(data.state_connection)) score += 15;
+      if (['NY', 'NYC', 'NJ', 'NY and NJ', 'Multi-state'].includes(data.state_connection)) score += 15;
       if (data.has_nyc_owners === 'Yes' || data.has_ny_owners === 'Yes' || data.has_nj_owners === 'Yes') score += 10;
       if (data.prior_elections !== 'Yes') score += 8;
       if (data.quarterly_estimates !== 'Yes') score += 8;
@@ -456,9 +456,9 @@
         score >= config.riskThresholds.ptet.high ? ['High priority', 'high'] :
           score >= config.riskThresholds.ptet.moderate ? ['Moderate priority', 'medium'] : ['Low priority', 'low'];
       const regimes = [];
-      if (['NY', 'NYC', 'NY + NJ', 'Multi-state'].includes(data.state_connection)) regimes.push('NY PTET');
+      if (['NY', 'NYC', 'NY and NJ', 'Multi-state'].includes(data.state_connection)) regimes.push('NY PTET');
       if (data.state_connection === 'NYC' || data.has_nyc_owners === 'Yes') regimes.push('NYC PTET');
-      if (['NJ', 'NY + NJ', 'Multi-state'].includes(data.state_connection)) regimes.push('NJ BAIT');
+      if (['NJ', 'NY and NJ', 'Multi-state'].includes(data.state_connection)) regimes.push('NJ BAIT');
       if (!regimes.length) regimes.push('None obvious based on inputs; needs review if facts differ.');
 
       renderResult(output, {
@@ -482,7 +482,7 @@
           '<p class="assumption-note">' +
           config.assumptions.ptetBait.sourceNote +
           '</p>',
-        ctaHref: '/contact.html?tool=ptet-bait',
+        ctaHref: '/contact',
         ctaLabel: config.cta.ptet
       });
     });
@@ -554,7 +554,7 @@
           checklist(getHelp) +
           '<h3>What to gather before speaking with us</h3>' +
           checklist(['Copy of notice.', 'Relevant tax return.', 'Proof of payment.', 'Account transcript if available.', 'Payroll/sales tax filings if applicable.', 'Bookkeeping reports.', 'Correspondence history.']),
-        ctaHref: '/contact.html?tool=tax-notice',
+        ctaHref: '/contact',
         ctaLabel: config.cta.notice
       });
     });
@@ -622,7 +622,7 @@
           '<h3>What to gather before speaking with us</h3>' +
           checklist(['Sales reports.', 'POS reports.', 'Shopify/Amazon/marketplace reports if applicable.', 'Filed sales tax returns.', 'QuickBooks sales tax payable detail.', 'Exemption certificates.', 'Bank statements if needed.']) +
           '<p class="assumption-note">Penalty and interest add-ons are illustrative only, not an actual agency calculation.</p>',
-        ctaHref: '/contact.html?tool=sales-tax',
+        ctaHref: '/contact',
         ctaLabel: config.cta.salesTax
       });
     });

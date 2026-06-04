@@ -15,5 +15,3 @@ build/
 
 # Generated Netlify upload artifacts.
 deploy-*.zip
-
-

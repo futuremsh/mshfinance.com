@@ -7,13 +7,13 @@
         'Do not enter Social Security numbers, EINs, taxpayer IDs, bank account numbers, passwords, full notice scans, or other sensitive documents into this public tool.'
     },
     cta: {
-      cashFlow: 'Book a Cash Flow Review',
-      sCorp: 'Book an S-Corp Election Review',
-      ptet: 'Book a PTET / BAIT Election Review',
-      notice: 'Book a Tax Notice Review',
-      salesTax: 'Book a Sales Tax Exposure Review'
+      cashFlow: 'Talk to a CPA',
+      sCorp: 'Talk to a CPA',
+      ptet: 'Talk to a CPA',
+      notice: 'Talk to a CPA',
+      salesTax: 'Talk to a CPA'
     },
-    jurisdictions: ['NYC', 'NY', 'NJ', 'NY + NJ', 'Multi-state', 'Other'],
+    jurisdictions: ['NYC', 'NY', 'NJ', 'NY and NJ', 'Multi-state', 'Other'],
     riskThresholds: {
       cashFlow: { watchWeeksBelowReserve: 1, tightWeeksBelowReserve: 4 },
       opportunity: { marginal: 2500, review: 7500, strong: 15000 },
@@ -27,7 +27,7 @@
         payrollTaxRate: 15.3,
         defaultComplianceCost: 4500,
         breakEvenNote:
-          'Break-even is simplified and does not model QBI, retirement plans, health insurance, basis, NYC/NYS/NJ treatment, or reasonable compensation analysis.'
+          'Break-even is simplified and does not model QBI, retirement plans, health insurance, basis, NY and NJ treatment, or reasonable compensation analysis.'
       },
       ptetBait: {
         sourceNote:
@@ -66,7 +66,7 @@
       'Tax notice or controversy',
       'Sales tax compliance',
       'Bookkeeping cleanup',
-      'Other NYC/NJ tax or finance issue'
+      'Other NY or NJ tax or finance issue'
     ]
   };
 })();

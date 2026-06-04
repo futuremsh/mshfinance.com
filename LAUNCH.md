@@ -184,7 +184,7 @@ https://mshfinance.com/resources/tax-notice-decoder/
 https://mshfinance.com/resources/sales-tax-exposure-estimator/
 https://mshfinance.com/privacy/
 https://mshfinance.com/terms/
-https://mshfinance.com/contact.html
+https://mshfinance.com/contact
 ```
 
 ## 8. Morning Review Options
@@ -197,6 +197,6 @@ Use these as the next decision list after reviewing the live site:
 4. Add downloadable PDF reports and XLSX templates.
 5. Add Google Analytics or Plausible analytics.
 6. Add approved testimonials or anonymized case studies.
-7. Add a downloadable NYC/NJ tax checklist PDF.
+7. Add a downloadable NY and NJ tax checklist PDF.
 8. Connect an email provider suppression list for `/unsubscribe/`.
 9. Have a CPA/legal reviewer approve PTET assumptions and all compliance copy before paid traffic.
