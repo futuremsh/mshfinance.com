@@ -228,7 +228,7 @@
       let entityBase = 0;
       let entityTaxItem = 0;
       const regimes = [];
-      if (['NY', 'NYC', 'NY + NJ'].includes(entity.operatesIn)) {
+      if (['NY', 'NYC', 'NY and NJ'].includes(entity.operatesIn)) {
         entityBase += entity.profit * (entity.mixedOwners === 'yes' ? entity.nySourcePercent : 1);
         entityTaxItem += calcProgressiveTax(Math.max(0, entityBase), config.ny.rateTable);
         regimes.push('NY PTET');
@@ -238,7 +238,7 @@
         entityTaxItem += nycBase * config.nyc.rate;
         regimes.push('NYC PTET');
       }
-      if (['NJ', 'NY + NJ'].includes(entity.operatesIn) || inputs.njResident === 'full_year') {
+      if (['NJ', 'NY and NJ'].includes(entity.operatesIn) || inputs.njResident === 'full_year') {
         const njBase =
           entity.type === 'partnership'
             ? entity.profit * (inputs.njResident === 'full_year' ? entity.ownership : entity.njSourcePercent)
@@ -343,7 +343,7 @@
         '<fieldset class="week-panel" ' + attr + '><legend>Entity ' + (index + 1) + '</legend><div class="form-row">' +
         '<div><label>Nickname<input name="entity_nickname_' + index + '" type="text" value="Entity ' + (index + 1) + '" required></label></div>' +
         '<div><label>Type<select name="entity_type_' + index + '"><option value="partnership">Partnership</option><option value="s_corp">S corp</option></select></label></div>' +
-        '<div><label>Operates in<select name="entity_operates_' + index + '"><option>NY</option><option>NYC</option><option>NJ</option><option>NY + NJ</option><option>Other</option></select></label></div>' +
+        '<div><label>Operates in<select name="entity_operates_' + index + '"><option>NY</option><option>NYC</option><option>NJ</option><option>NY and NJ</option><option>Other</option></select></label></div>' +
         '<div><label>Ownership %<input name="entity_ownership_' + index + '" type="number" min="0" max="100" step="1" value="100" required></label></div>' +
         '<div><label>Total entity profit estimate<input name="entity_profit_' + index + '" type="number" min="0" step="1000" required></label></div>' +
         '<div><label>Mixed NY resident/nonresident owners?<select name="entity_mixed_' + index + '"><option value="no">No</option><option value="yes">Yes</option><option value="not_sure">Not sure</option></select></label></div>' +
@@ -407,7 +407,7 @@
       '<h3>Top confidence reasons</h3><ul class="outcome-list"><li>' + result.confidenceReasons.join('</li><li>') + '</li></ul>' +
       '<h3>What could change this result</h3><ul class="outcome-list"><li>' + result.whatCouldChange.join('</li><li>') + '</li></ul>' +
       '<h3>What we did / what we did not do</h3><p>We modeled a simplified federal baseline versus entity-level PTET/BAIT expense using 2026 config assumptions. We did not perform a full state return calculation, basis analysis, QBI limitation analysis, or formal election recommendation.</p>' +
-      '<div class="cta-strip"><a class="btn btn-primary" href="/contact.html?tool=ptet-2026">Schedule consult</a><button class="btn btn-secondary" type="button" data-save-result>Save my results</button><button class="btn btn-secondary" type="button" data-print-result>Print result</button></div>' +
+      '<div class="cta-strip"><a class="btn btn-primary" href="/contact">Talk to a CPA</a><button class="btn btn-secondary" type="button" data-save-result>Save my results</button><button class="btn btn-secondary" type="button" data-print-result>Print result</button></div>' +
       '</section>';
 
     const packageForm = $('[data-report-package]');

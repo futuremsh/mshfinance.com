@@ -4,18 +4,11 @@ This is a static website. Launch only the root site files, not the `quickfire-cp
 
 ## 1. Pre-Launch Setup
 
-1. Create a Formspree form at `https://formspree.io`.
-2. Copy the endpoint that looks like `https://formspree.io/f/xxxxxxxx`.
-3. In `contact.html`, replace:
-
-```html
-https://formspree.io/f/your-form-id
-```
-
-with the real endpoint.
-
-4. Submit the contact form once from a local preview and approve/confirm the Formspree email if prompted.
-5. Confirm the contact form delivers to the right inbox.
+1. Confirm Netlify Forms is enabled for the site.
+2. Deploy `contact.html` with the `contact` form markup.
+3. Confirm Netlify detects the `contact` form after the deploy.
+4. Submit one live test inquiry from the contact page.
+5. Confirm the submission appears in Netlify Forms and reaches the right inbox or notification workflow.
 
 ## 2. Local Preview
 
@@ -191,7 +184,7 @@ https://mshfinance.com/resources/tax-notice-decoder/
 https://mshfinance.com/resources/sales-tax-exposure-estimator/
 https://mshfinance.com/privacy/
 https://mshfinance.com/terms/
-https://mshfinance.com/contact.html
+https://mshfinance.com/contact
 ```
 
 ## 8. Morning Review Options
@@ -204,6 +197,6 @@ Use these as the next decision list after reviewing the live site:
 4. Add downloadable PDF reports and XLSX templates.
 5. Add Google Analytics or Plausible analytics.
 6. Add approved testimonials or anonymized case studies.
-7. Add a downloadable NYC/NJ tax checklist PDF.
+7. Add a downloadable NY and NJ tax checklist PDF.
 8. Connect an email provider suppression list for `/unsubscribe/`.
 9. Have a CPA/legal reviewer approve PTET assumptions and all compliance copy before paid traffic.

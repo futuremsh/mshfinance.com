@@ -55,6 +55,42 @@
     });
   }
 
+  const rotator = document.querySelector('[data-question-rotator]');
+  if (rotator && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const questions = Array.from(rotator.querySelectorAll('.question-item'));
+    if (questions.length > 1) {
+      const questionDisplayMs = 4000;
+      const questionFadeMs = 520;
+
+      for (let i = questions.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        if (i !== j) {
+          rotator.insertBefore(questions[j], questions[i]);
+          questions.splice(i, 0, questions.splice(j, 1)[0]);
+        }
+      }
+
+      let activeIndex = questions.findIndex(function (question) {
+        return question.classList.contains('active');
+      });
+      if (activeIndex < 0) {
+        activeIndex = 0;
+          questions[0].classList.add('active');
+      }
+
+      function showNextQuestion() {
+        questions[activeIndex].classList.remove('active');
+        window.setTimeout(function () {
+          activeIndex = (activeIndex + 1) % questions.length;
+          questions[activeIndex].classList.add('active');
+          window.setTimeout(showNextQuestion, questionDisplayMs);
+        }, questionFadeMs);
+      }
+
+      window.setTimeout(showNextQuestion, questionDisplayMs);
+    }
+  }
+
   const form = document.querySelector('[data-contact-form]');
   const statusEl = document.querySelector('[data-form-status]');
 
@@ -69,23 +105,16 @@
 
   if (tool && message) {
     const toolLabels = {
-      readiness: 'NYC/NJ Financial Readiness Score',
       'cash-flow': '13-Week Cash Flow Forecast Tool',
-      runway: 'Cash Flow Runway Calculator',
-      self_tax: 'Self-Employment Tax Snapshot',
-      cfo_roi: 'Fractional CFO ROI Estimator',
       's-corp': 'S-Corp Election Savings Calculator',
-      scorp: 'S-Corp Tax Savings Estimator',
       'ptet-bait': 'PTET / NJ BAIT Election Analyzer',
-      'tax-notice': 'IRS / NY / NJ Tax Notice Decoder',
+      'tax-notice': 'Tax Notice Decoder',
       'sales-tax': 'Sales Tax Exposure Estimator',
-      w2: 'W-2 Take-Home Snapshot',
-      rent: 'Rent Burden Planner'
     };
     message.value =
       'I used the ' +
       (toolLabels[tool] || 'website calculator') +
-      ' and would like a personalized NYC/NJ review.';
+      ' and would like to talk to a CPA.';
     if (serviceInterest) {
       if (tool === 'sales-tax') {
         serviceInterest.value = 'sales_tax';
@@ -94,7 +123,7 @@
       } else if (tool === 'ptet-bait') {
         serviceInterest.value = 'ptet_bait';
       } else {
-        serviceInterest.value = tool === 'cfo_roi' || tool === 'runway' || tool === 'cash-flow' ? 'cfo' : 'tax';
+        serviceInterest.value = tool === 'cash-flow' ? 'cfo' : 'tax';
       }
     }
   }
@@ -111,12 +140,6 @@
       return;
     }
 
-    if (form.action.includes('your-form-id')) {
-      statusEl.classList.add('error');
-      statusEl.textContent = 'Launch setup needed: replace the Formspree placeholder endpoint before this form can send.';
-      return;
-    }
-
     statusEl.textContent = 'Sending your message...';
 
     const formData = new FormData(form);
@@ -125,9 +148,9 @@
       const response = await fetch(form.action, {
         method: form.method,
         headers: {
-          Accept: 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: formData
+        body: new URLSearchParams(formData).toString()
       });
 
       if (response.ok) {
