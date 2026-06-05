@@ -5,13 +5,19 @@ import path from 'node:path';
 
 const root = path.resolve('.');
 const ignoredDirs = new Set(['.git', 'quickfire-cpa', 'MSH FG', 'node_modules']);
-const textExts = new Set(['.html', '.js', '.css', '.md', '.xml', '.txt', '.toml']);
+const textExts = new Set(['.html', '.js', '.ts', '.css', '.md', '.xml', '.txt', '.toml']);
 const educationalDisclaimer =
   'For educational and screening purposes only. These tools do not constitute legal, tax, accounting, or financial advice and do not create a CPA-client relationship. Review any results with a qualified professional before taking action.';
 const resourcesDescription =
   'Free tax, cash flow, and compliance screening tools for NY and NJ business owners and individuals.';
 const cpaFirmDisclosure =
   'MSH Finance Group LLC is a tax, accounting and advisory firm. While individual members or employees of MSH Finance Group LLC may hold individual Certified Public Accountant (CPA) licenses in NY and/or NJ, MSH Finance Group LLC is not registered as a CPA firm in NJ and does not offer attest services (e.g. audits or review engagements).';
+const mailchimpEnvVars = [
+  'MAILCHIMP_API_KEY',
+  'MAILCHIMP_SERVER_PREFIX',
+  'MAILCHIMP_AUDIENCE_ID',
+  'MAILCHIMP_SUBSCRIBE_STATUS'
+];
 const homepageRotatorQuestions = [
   'Can I afford to hire someone, buy equipment, open a new location, or should I calm down first?',
   'I got a letter from the IRS. Should I panic now or after you read it?',
@@ -355,5 +361,26 @@ describe('site content audit', () => {
       assert.equal(content.includes('class="site-footer"'), true, page);
       assert.equal(content.includes('href="/privacy-policy/"'), true, page);
     }
+  });
+
+  it('keeps Mailchimp signup server-side and out of source secrets', async () => {
+    const mainScript = await readRelative('assets/js/main.js');
+    const functionFile = await readRelative('netlify/functions/mailchimp-subscribe.ts');
+    assert.equal(mainScript.includes('/api/mailchimp-subscribe'), true);
+    assert.equal(functionFile.includes('export const config'), true);
+    assert.equal(functionFile.includes('path: "/api/mailchimp-subscribe"'), true);
+    assert.equal(functionFile.includes('status_if_new'), true);
+    for (const envVar of mailchimpEnvVars) {
+      assert.equal(functionFile.includes(envVar), true, envVar);
+    }
+
+    const offenders = [];
+    for (const file of await textFiles()) {
+      const content = await readFile(file, 'utf8');
+      if (/[a-f0-9]{32}-us\d{1,3}/i.test(content)) {
+        offenders.push(relative(file));
+      }
+    }
+    assert.deepEqual(offenders, []);
   });
 });

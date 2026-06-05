@@ -152,6 +152,42 @@
     field.addEventListener('change', validateServiceInterest);
   });
 
+  function buildMailchimpPayload(formData) {
+    return {
+      email: String(formData.get('email') || ''),
+      name: String(formData.get('name') || ''),
+      company: String(formData.get('company') || ''),
+      location: String(formData.get('location') || ''),
+      serviceInterest: formData.getAll('service_interest').map(function (value) {
+        return String(value);
+      }),
+      mailingListOptIn: formData.get('mailing_list_opt_in') === 'yes'
+    };
+  }
+
+  async function subscribeToMailingList(formData) {
+    const payload = buildMailchimpPayload(formData);
+    if (!payload.mailingListOptIn) return null;
+
+    const response = await fetch('/api/mailchimp-subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json().catch(function () {
+      return {};
+    });
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Mailing list signup failed.');
+    }
+
+    return result;
+  }
+
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
     statusEl.className = 'form-status';
@@ -180,9 +216,26 @@
       });
 
       if (response.ok) {
+        let mailingListResult = null;
+        let mailingListError = false;
+
+        try {
+          mailingListResult = await subscribeToMailingList(formData);
+        } catch (error) {
+          mailingListError = formData.get('mailing_list_opt_in') === 'yes';
+        }
+
         form.reset();
         statusEl.classList.add('success');
-        statusEl.textContent = 'Thanks. Your message was sent successfully. We will respond shortly.';
+        if (mailingListResult && mailingListResult.doubleOptIn) {
+          statusEl.textContent = 'Thanks. Your message was sent successfully. Please check your inbox to confirm the mailing list signup.';
+        } else if (mailingListResult) {
+          statusEl.textContent = 'Thanks. Your message was sent successfully, and you are on the mailing list.';
+        } else if (mailingListError) {
+          statusEl.textContent = 'Thanks. Your message was sent successfully. We could not complete the mailing list signup, but we will still respond shortly.';
+        } else {
+          statusEl.textContent = 'Thanks. Your message was sent successfully. We will respond shortly.';
+        }
       } else {
         statusEl.classList.add('error');
         statusEl.textContent = 'We could not submit the form right now. Please email info@mshfinance.com.';
