@@ -79,24 +79,5 @@
 
   <script src="/assets/js/main.js" defer></script>
   <script src="/assets/js/toolsFramework.js" defer></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var form = document.querySelector('[data-unsubscribe-form]');
-      var status = document.querySelector('[data-unsubscribe-status]');
-      if (!form || !status) return;
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-        // TODO: Send this email to the email provider suppression list and retain only what is needed for opt-out compliance.
-        status.hidden = false;
-        status.className = 'form-status success';
-        status.textContent = 'Unsubscribe request validated locally. Connect the email provider suppression list before production use.';
-        form.reset();
-      });
-    });
-  </script>
 </body>
 </html>

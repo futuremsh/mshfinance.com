@@ -91,6 +91,24 @@
     }
   }
 
+  const unsubscribeForm = document.querySelector('[data-unsubscribe-form]');
+  const unsubscribeStatus = document.querySelector('[data-unsubscribe-status]');
+
+  if (unsubscribeForm && unsubscribeStatus) {
+    unsubscribeForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!unsubscribeForm.checkValidity()) {
+        unsubscribeForm.reportValidity();
+        return;
+      }
+      // TODO: Send this email to the email provider suppression list and retain only what is needed for opt-out compliance.
+      unsubscribeStatus.hidden = false;
+      unsubscribeStatus.className = 'form-status success';
+      unsubscribeStatus.textContent = 'Unsubscribe request validated locally. Connect the email provider suppression list before production use.';
+      unsubscribeForm.reset();
+    });
+  }
+
   const form = document.querySelector('[data-contact-form]');
   const statusEl = document.querySelector('[data-form-status]');
 

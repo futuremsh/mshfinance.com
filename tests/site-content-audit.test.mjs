@@ -337,8 +337,21 @@ describe('site content audit', () => {
     assert.equal(policy.includes('MSH collects'), false);
     assert.equal(policy.includes('MSH uses'), false);
     assert.equal(policy.includes('Mailing-list consent is optional'), true);
-    assert.equal(policy.includes('not sold or shared with third parties for their own marketing purposes'), true);
+    assert.equal(policy.includes('does not sell your personal information'), true);
+    assert.equal(policy.includes('does not share contact form or mailing-list information with third parties for their own marketing purposes'), true);
     assert.equal(policy.includes('secure portal link'), true);
+    assert.equal(policy.includes('Netlify Forms'), true);
+    assert.equal(policy.includes('Mailchimp'), true);
+    assert.equal(policy.includes('form-notification emails'), true);
+    assert.equal(policy.includes('confirmation email before adding you to the mailing list'), true);
+    assert.equal(policy.includes('netlify.com/privacy'), true);
+    assert.equal(policy.includes('intuit.com/privacy'), true);
+    assert.equal(policy.includes('Retention and deletion'), true);
+
+    const privacy = await readRelative('privacy/index.html');
+    assert.equal(privacy.includes('Netlify Forms'), true);
+    assert.equal(privacy.includes('Mailchimp'), true);
+    assert.equal(privacy.includes('No analytics tools are currently active on this site.'), true);
 
     const missingFooterLink = [];
     for (const file of await htmlFiles()) {
@@ -361,6 +374,29 @@ describe('site content audit', () => {
       assert.equal(content.includes('class="site-footer"'), true, page);
       assert.equal(content.includes('href="/privacy-policy/"'), true, page);
     }
+  });
+
+  it('sets a restrictive Content Security Policy compatible with current site assets', async () => {
+    const headers = await readRelative('_headers');
+    assert.equal(headers.includes('Content-Security-Policy:'), true);
+    assert.equal(headers.includes("default-src 'self'"), true);
+    assert.equal(headers.includes("script-src 'self'"), true);
+    assert.equal(headers.includes('style-src \'self\' https://fonts.googleapis.com'), true);
+    assert.equal(headers.includes('font-src \'self\' https://fonts.gstatic.com'), true);
+    assert.equal(headers.includes("img-src 'self' data:"), true);
+    assert.equal(headers.includes("connect-src 'self'"), true);
+    assert.equal(headers.includes("form-action 'self'"), true);
+    assert.equal(headers.includes("object-src 'none'"), true);
+    assert.equal(headers.includes("frame-ancestors 'none'"), true);
+
+    const inlineScriptPages = [];
+    for (const file of await htmlFiles()) {
+      const content = await readFile(file, 'utf8');
+      if (/<script(?![^>]*\bsrc=)[^>]*>/i.test(content)) {
+        inlineScriptPages.push(relative(file));
+      }
+    }
+    assert.deepEqual(inlineScriptPages, []);
   });
 
   it('keeps Mailchimp signup server-side and out of source secrets', async () => {
