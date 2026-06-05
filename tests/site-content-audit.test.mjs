@@ -10,6 +10,8 @@ const educationalDisclaimer =
   'For educational and screening purposes only. These tools do not constitute legal, tax, accounting, or financial advice and do not create a CPA-client relationship. Review any results with a qualified professional before taking action.';
 const resourcesDescription =
   'Free tax, cash flow, and compliance screening tools for NY and NJ business owners and individuals.';
+const cpaFirmDisclosure =
+  'MSH Finance Group LLC is a tax, accounting and advisory firm. While individual members or employees of MSH Finance Group LLC may hold individual Certified Public Accountant (CPA) licenses in NY and/or NJ, MSH Finance Group LLC is not registered as a CPA firm in NJ and does not offer attest services (e.g. audits or review engagements).';
 const homepageRotatorQuestions = [
   'Can I afford to hire someone, buy equipment, open a new location, or should I calm down first?',
   'I got a letter from the IRS. Should I panic now or after you read it?',
@@ -65,7 +67,7 @@ describe('site content audit', () => {
     for (const file of await textFiles()) {
       const content = await readFile(file, 'utf8');
       const match = content.match(/MSH Finance(?! Group LLC)/);
-      if (match) offenders.push(relative(file));
+      if (match || content.includes('MSH Finance Group, LLC')) offenders.push(relative(file));
     }
     assert.deepEqual(offenders, []);
   });
@@ -119,12 +121,30 @@ describe('site content audit', () => {
     assert.equal(about.includes('Publish only memberships and credentials'), false);
   });
 
+  it('shows approved partner bios on the about page', async () => {
+    const about = await readRelative('about.html');
+    assert.equal(about.includes('Meet Jacqueline Srour and Morris Shalom'), true);
+    assert.equal(about.includes('<h1>Expert guidance for decisions that need context</h1>'), true);
+    assert.equal(about.includes('brings tax, accounting, compliance, and operating finance experience together'), true);
+    assert.equal(about.includes('CPA-led guidance for New York and New Jersey'), false);
+    assert.equal(about.includes('<h2>Without Further Ado, Meet the Leadership Team</h2>'), true);
+    assert.equal(about.includes('<h2>Partner Bios</h2>'), false);
+    assert.equal(about.includes('Partner-led guidance for decisions that need context'), false);
+    assert.equal(about.includes('<h3>Jacqueline Srour</h3>'), true);
+    assert.equal(about.includes('<h3>Morris Shalom</h3>'), true);
+    assert.equal(about.includes('licensed attorney in New York and New Jersey'), true);
+    assert.equal(about.includes('licensed CPA in both New York and New Jersey'), true);
+    assert.equal(about.includes('placeholder'), false);
+  });
+
   it('updates services FAQ answer and resources descriptions', async () => {
     const services = await readRelative('services.html');
     assert.equal(services.includes('MSH works with clients across the country for fractional CFO and advisory services, bookkeeping, and federal tax matters.'), true);
     assert.equal(services.includes('This site is now focused on'), false);
     assert.equal(services.includes('<section class="page-hero services-hero section">'), true);
-    assert.equal(services.includes('<h1>Services for New York and<br>New Jersey financial decisions</h1>'), true);
+    assert.equal(services.includes('<h1>Services that turn financial details into better decisions</h1>'), true);
+    assert.equal(services.includes('use financial information before decisions get expensive'), true);
+    assert.equal(services.includes('Services for New York and'), false);
 
     for (const resourcePage of ['resources.html', 'resources/index.html']) {
       const content = await readRelative(resourcePage);
@@ -133,7 +153,7 @@ describe('site content audit', () => {
   });
 
   it('keeps standard page heroes clear of the oversized header logo', async () => {
-    for (const page of ['about.html', 'contact.html', 'resources.html', 'resources/index.html']) {
+    for (const page of ['about.html', 'contact.html', 'resources.html', 'resources/index.html', 'privacy-policy/index.html', 'privacy/index.html']) {
       const content = await readRelative(page);
       assert.equal(content.includes('<section class="page-hero logo-clear-hero section">'), true, page);
     }
@@ -177,6 +197,34 @@ describe('site content audit', () => {
     assert.deepEqual(offenders, []);
   });
 
+  it('keeps the header primary CTA readable', async () => {
+    const styles = await readRelative('assets/css/styles.css');
+    assert.match(styles, /\.nav-links\s+a\.btn-primary[^{]*\{[^}]*color:\s*#fff/s);
+    assert.match(styles, /\.nav-links\s+a\.btn-primary:hover[^{]*\{[^}]*color:\s*#fff/s);
+  });
+
+  it('uses CPA firm status disclosure only in footer and common questions', async () => {
+    const oldPhrases = [
+      'MSH Finance Group LLC is not a registered CPA firm',
+      'MSH Finance Group LLC is an advisory and consulting firm led by Morris Shalom, CPA. MSH Finance Group LLC is not a registered CPA firm.',
+      'Advisory and consulting firm led by Morris Shalom, CPA.'
+    ];
+    const offenders = [];
+    for (const file of await htmlFiles()) {
+      const content = await readFile(file, 'utf8');
+      for (const phrase of oldPhrases) {
+        if (content.includes(phrase)) offenders.push(`${relative(file)} -> ${phrase}`);
+      }
+      if (content.includes('site-footer') && !content.includes(`<p class="small legal-disclosure">${cpaFirmDisclosure}</p>`)) {
+        offenders.push(`${relative(file)} -> missing footer disclosure`);
+      }
+    }
+
+    const services = await readRelative('services.html');
+    assert.equal(services.includes(`<p>${cpaFirmDisclosure}</p>`), true);
+    assert.deepEqual(offenders, []);
+  });
+
   it('points Talk to a CPA html ctas at /contact', async () => {
     const offenders = [];
     for (const file of await htmlFiles()) {
@@ -189,15 +237,29 @@ describe('site content audit', () => {
     assert.deepEqual(offenders, []);
   });
 
-  it('removes phone fields from the contact form and keeps honeypot hidden', async () => {
+  it('updates the contact form fields, sensitive-info warnings, and honeypot', async () => {
     const contact = await readRelative('contact.html');
     assert.equal(contact.includes('name="preferred_contact"'), false);
     assert.equal(contact.includes('id="phone"'), false);
     assert.equal(contact.includes('name="phone"'), false);
+    assert.equal(contact.includes('name="client_type"'), false);
+    assert.equal(contact.includes('I am a *'), false);
     assert.equal(contact.includes('name="bot-field"'), true);
+    assert.equal(contact.includes('data-netlify="true"'), true);
+    assert.equal(contact.includes('name="form-name" value="contact"'), true);
+    assert.equal(contact.includes('name="subject" value="New MSH Finance Group LLC contact form submission"'), true);
+    assert.equal(contact.includes('data-service-interest-group'), true);
+    assert.equal((contact.match(/name="service_interest"/g) || []).length >= 6, true);
+    assert.equal(contact.includes('name="mailing_list_opt_in"'), true);
+    assert.equal(contact.includes('No spam, no selling your data, no nonsense.'), true);
+    assert.equal(contact.includes('Please do not submit sensitive information through this form'), true);
+    assert.equal(contact.includes('Please keep sensitive details out of this box.'), true);
+    assert.equal(contact.includes('We proudly serve clients throughout the U.S. remotely and at our offices in Oakhurst and Red Bank, NJ.'), true);
+    assert.equal(contact.includes('We will reach out to schedule a virtual or in-person meeting in Red Bank, NJ'), true);
 
     const styles = await readRelative('assets/css/styles.css');
     assert.match(styles, /\.netlify-honeypot\s*\{[^}]*display:\s*none/s);
+    assert.match(styles, /\.nav-links\s*\{[^}]*top:\s*calc\(\(var\(--header-h\) \* 2\) \+ 12px\)/s);
   });
 
   it('only references live resources tools on the homepage', async () => {
@@ -212,18 +274,19 @@ describe('site content audit', () => {
     }
   });
 
-  it('updates homepage hero, rotating questions, and three service lanes', async () => {
+  it('updates homepage hero, rotating questions, and service details link', async () => {
     const home = await readRelative('index.html');
     const mainScript = await readRelative('assets/js/main.js');
     assert.equal(home.includes('<span class="hero-kicker">Financial clarity, <em>before</em> the numbers get complicated.</span>'), true);
     assert.equal(home.includes('<h1>Numbers you can understand. Decisions you can stand behind.</h1>'), true);
     assert.equal(home.includes('Tax, books, and advisory that work from the same set of facts.'), false);
-    assert.equal(home.match(/Three disciplines, one coordinated financial picture\./g)?.length, 1);
+    assert.equal(home.includes('Three disciplines, one coordinated financial picture.'), false);
     assert.equal(
       home.includes('MSH Finance Group LLC helps individuals and business owners understand their numbers, plan ahead, and make proactive financial decisions before taxes are due or cash pressure hits.'),
       true
     );
-    assert.equal(home.includes('Try our free tools'), true);
+    assert.equal(home.includes('Try our Free Tools'), true);
+    assert.equal(home.includes('Try our free tools'), false);
     assert.equal(home.includes('Try the NY and NJ Tools'), false);
     assert.equal(home.includes('data-question-rotator'), true);
     assert.equal(home.includes('Do you have questions like this?'), true);
@@ -232,9 +295,8 @@ describe('site content audit', () => {
     for (const question of homepageRotatorQuestions) {
       assert.equal(home.includes(question), true, question);
     }
-    for (const lane of ['Tax', 'Bookkeeping &amp; Accounting', 'Fractional CFO and Advisory']) {
-      assert.equal(home.includes(lane), true, lane);
-    }
+    assert.equal(home.includes('<a class="btn btn-primary" href="/services">View Service Details</a>'), true);
+    assert.equal(home.includes('service-details-link'), false);
     assert.equal(home.includes('class="hero-points"'), false);
     assert.equal(home.includes('class="metric-grid"'), false);
     assert.equal(home.includes('class="signal-list"'), false);
@@ -242,17 +304,35 @@ describe('site content audit', () => {
     assert.equal(home.includes('Practical help for the moments where money gets complicated'), false);
     assert.equal(home.includes('Start with the free finance and tax tools'), true);
     assert.equal(home.includes('Start with the free NY and NJ planning tools'), false);
-    assert.equal(home.includes('Specializing in NY and NJ individuals and businesses'), true);
+    assert.equal(home.includes("Don't know where to start? Well, we do."), true);
+    assert.equal(home.includes('Specializing in NY and NJ individuals and businesses'), false);
     assert.equal(home.includes('Focused on New York and New Jersey individuals'), false);
     const trustBand = home.match(/<div class="trust-band reveal">([\s\S]*?)<\/div>\s*<\/div>\s*<\/section>/)?.[1] ?? '';
     assert.equal((trustBand.match(/<a class="btn btn-light" href="\/contact">Talk to a CPA<\/a>/g) || []).length, 1);
   });
 
+  it('moves the three service lanes onto the services page', async () => {
+    const services = await readRelative('services.html');
+    assert.equal(services.includes('Three disciplines, one coordinated financial picture.'), true);
+    for (const lane of ['Tax', 'Bookkeeping &amp; Accounting', 'Fractional CFO and Advisory']) {
+      assert.equal(services.includes(lane), true, lane);
+    }
+    assert.equal(services.includes('Tax Planning'), false);
+    assert.equal(services.includes('Advisory + CFO Support'), false);
+    assert.equal(services.includes('Engagement models'), false);
+    assert.equal(services.includes('<h2>Who this is for</h2>'), false);
+  });
+
   it('adds privacy policy page and footer link', async () => {
     const policy = await readRelative('privacy-policy/index.html');
-    assert.equal(policy.includes('Effective date: June 4, 2026'), true);
+    assert.equal(policy.includes('Effective date: June 5, 2026'), true);
     assert.equal(policy.includes('info@mshfinance.com'), true);
     assert.equal(policy.includes('No analytics tools are currently active on this site.'), true);
+    assert.equal(policy.includes('MSH collects'), false);
+    assert.equal(policy.includes('MSH uses'), false);
+    assert.equal(policy.includes('Mailing-list consent is optional'), true);
+    assert.equal(policy.includes('not sold or shared with third parties for their own marketing purposes'), true);
+    assert.equal(policy.includes('secure portal link'), true);
 
     const missingFooterLink = [];
     for (const file of await htmlFiles()) {

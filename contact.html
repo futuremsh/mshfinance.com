@@ -7,11 +7,11 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
   <title>Contact | MSH Finance Group LLC</title>
-  <meta name="description" content="Contact MSH Finance Group LLC for New York and New Jersey tax planning, bookkeeping, cash-flow, and advisory support.">
+  <meta name="description" content="Contact MSH Finance Group LLC to ask about tax, accounting, bookkeeping, cash-flow, and advisory services.">
   <link rel="canonical" href="https://mshfinance.com/contact">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Contact | MSH Finance Group LLC">
-  <meta property="og:description" content="Start a conversation about your financial priorities.">
+  <meta property="og:description" content="Ask about services and how MSH Finance Group LLC may be able to help.">
   <meta property="og:url" content="https://mshfinance.com/contact">
   <meta property="og:image" content="https://mshfinance.com/assets/images/mshlandinglogo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,8 @@
     <section class="page-hero logo-clear-hero section">
       <div class="container heading reveal">
         <h1>Talk to a CPA about your financial priorities</h1>
-        <p>Share your individual or business owner situation and we will follow up with the right next step.</p>
+        <p>Tell us what you are looking for, what questions you are trying to answer, or what kind of support would make things easier. We will point you toward the right next step.</p>
+        <p class="sensitive-note">Please do not submit sensitive information through this form, including Social Security numbers, taxpayer identification numbers, bank details, tax returns, or other confidential financial information. If we need anything sensitive, we will send you a secure portal link.</p>
       </div>
     </section>
 
@@ -47,7 +48,7 @@
       <div class="container contact-grid">
         <article class="card reveal">
           <h2>Contact form</h2>
-          <p class="small">Use this form for New York and New Jersey tax, bookkeeping, cash-flow, and planning questions.</p>
+          <p class="small">Use this form to ask about our services and how we may be able to help.</p>
           <form
             data-contact-form
             name="contact"
@@ -59,6 +60,7 @@
           >
             <input type="hidden" name="form-name" value="contact">
             <input type="hidden" name="source_page" value="Contact page">
+            <input type="hidden" name="subject" value="New MSH Finance Group LLC contact form submission">
             <p class="netlify-honeypot">
               <label>Do not fill this out if you are human: <input name="bot-field"></label>
             </p>
@@ -78,45 +80,39 @@
                 <label for="location">Location *</label>
                 <select id="location" name="location" required>
                   <option value="">Select one</option>
-                  <option value="nyc">NY resident or individual</option>
-                  <option value="nj">NJ resident or individual</option>
-                  <option value="ny_nj_business">NY and NJ business owner</option>
+                  <option value="ny">New York</option>
+                  <option value="nj">New Jersey</option>
+                  <option value="other_us">Other U.S. location</option>
+                  <option value="outside_us">Outside the U.S.</option>
                 </select>
               </div>
-              <div>
-                <label for="client_type">I am a *</label>
-                <select id="client_type" name="client_type" required>
-                  <option value="">Select one</option>
-                  <option value="individual">Individual / employee</option>
-                  <option value="resident">Individual</option>
-                  <option value="owner_operator">Owner-operator / business owner</option>
-                  <option value="other">Other NY or NJ situation</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
               <div>
                 <label for="company">Company</label>
                 <input id="company" name="company" type="text" autocomplete="organization">
               </div>
-              <div>
-                <label for="service_interest">Service interest *</label>
-                <select id="service_interest" name="service_interest" required>
-                  <option value="">Select one</option>
-                  <option value="cfo">Fractional CFO / Controller</option>
-                  <option value="bookkeeping">Bookkeeping</option>
-                  <option value="tax">Tax Compliance &amp; Planning</option>
-                  <option value="tax_notice">Tax Notice / Controversy</option>
-                  <option value="sales_tax">Sales Tax Compliance</option>
-                  <option value="ptet_bait">PTET / NJ BAIT Review</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
             </div>
 
+            <fieldset class="checkbox-group" data-service-interest-group>
+              <legend>Service interest *</legend>
+              <div class="checkbox-grid">
+                <label class="checkbox-row"><input type="checkbox" name="service_interest" value="cfo"> <span>Fractional CFO / Controller</span></label>
+                <label class="checkbox-row"><input type="checkbox" name="service_interest" value="bookkeeping"> <span>Bookkeeping</span></label>
+                <label class="checkbox-row"><input type="checkbox" name="service_interest" value="tax"> <span>Tax compliance &amp; planning</span></label>
+                <label class="checkbox-row"><input type="checkbox" name="service_interest" value="tax_notice"> <span>Tax notice / controversy</span></label>
+                <label class="checkbox-row"><input type="checkbox" name="service_interest" value="sales_tax"> <span>Sales tax compliance</span></label>
+                <label class="checkbox-row"><input type="checkbox" name="service_interest" value="ptet_bait"> <span>PTET / NJ BAIT review</span></label>
+                <label class="checkbox-row"><input type="checkbox" name="service_interest" value="other"> <span>Other</span></label>
+              </div>
+            </fieldset>
+
             <label for="message">How can we help? *</label>
+            <p class="input-hint">Please keep sensitive details out of this box. No Social Security numbers, taxpayer IDs, bank details, tax returns, or confidential financial documents.</p>
             <textarea id="message" name="message" required></textarea>
+
+            <label class="checkbox-row mailing-opt-in">
+              <input type="checkbox" name="mailing_list_opt_in" value="yes">
+              <span>Add me to the mailing list for useful tax and finance notes. No spam, no selling your data, no nonsense.</span>
+            </label>
 
             <button class="btn btn-primary" type="submit">Send Message</button>
             <div data-form-status class="form-status" role="status" aria-live="polite" hidden></div>
@@ -125,18 +121,11 @@
 
         <aside class="card reveal">
           <h2>Service region</h2>
-          <p>Serving New York and New Jersey individuals and business owners.</p>
+          <p>We proudly serve clients throughout the U.S. remotely and at our offices in Oakhurst and Red Bank, NJ.</p>
           <h3>Email</h3>
           <p><a href="mailto:info@mshfinance.com">info@mshfinance.com</a></p>
           <h3>What to expect</h3>
-          <ul class="outcome-list">
-            <li>Initial response with next steps.</li>
-            <li>Short review to confirm fit.</li>
-            <li>Recommended engagement structure.</li>
-          </ul>
-          <div class="lead-box">
-            Compliance note: MSH Finance Group LLC is not a registered CPA firm. Advisory and consulting services are led by Morris Shalom, CPA.
-          </div>
+          <p>We will reach out to schedule a virtual or in-person meeting in Red Bank, NJ to assess your individual or business needs. We will then determine whether we are a strong fit to work together. If so, we will share a proposal for how we can achieve success.</p>
         </aside>
       </div>
     </section>
@@ -146,8 +135,7 @@
     <div class="container footer-grid">
       <div>
         <p><strong>MSH Finance Group LLC</strong></p>
-        <p class="small">Advisory and consulting firm led by Morris Shalom, CPA.</p>
-        <p class="small">MSH Finance Group LLC is not a registered CPA firm.</p>
+        <p class="small legal-disclosure">MSH Finance Group LLC is a tax, accounting and advisory firm. While individual members or employees of MSH Finance Group LLC may hold individual Certified Public Accountant (CPA) licenses in NY and/or NJ, MSH Finance Group LLC is not registered as a CPA firm in NJ and does not offer attest services (e.g. audits or review engagements).</p>
         <p class="small">© 2026 MSH Finance Group LLC. All rights reserved.</p>
       </div>
       <nav class="footer-nav" aria-label="Footer">

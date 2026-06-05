@@ -203,6 +203,12 @@ main > section {
   color: var(--brand);
 }
 
+.nav-links a.btn-primary,
+.nav-links a.btn-primary:hover {
+  background: linear-gradient(120deg, var(--brand), var(--brand-2));
+  color: #fff;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -366,9 +372,10 @@ main > section {
 
 .question-card-cta {
   display: grid;
-  justify-items: start;
+  justify-items: center;
   gap: 0.75rem;
   margin-top: 1rem;
+  text-align: center;
 }
 
 .question-card-cta p {
@@ -714,6 +721,44 @@ input[type="checkbox"] {
   margin-top: 0.25rem;
 }
 
+.checkbox-row span {
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+
+.checkbox-group {
+  margin: 0.9rem 0 1rem;
+  padding: 0.8rem 0.9rem 0.2rem;
+  border: 1px solid #c7d3e6;
+  border-radius: 12px;
+  background: #fbfdff;
+}
+
+.checkbox-group legend {
+  padding: 0 0.35rem;
+  color: #1d3557;
+  font-size: 0.93rem;
+  font-weight: 800;
+}
+
+.checkbox-grid {
+  display: grid;
+  gap: 0 0.9rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.checkbox-group.error-field {
+  border-color: var(--danger);
+}
+
+.mailing-opt-in {
+  align-items: flex-start;
+  padding: 0.8rem;
+  border: 1px solid #bfd2ef;
+  border-radius: 12px;
+  background: #eef5ff;
+}
+
 input:focus,
 select:focus,
 textarea:focus,
@@ -876,6 +921,17 @@ textarea {
   margin: -0.1rem 0 0.45rem;
   color: #64748b;
   font-size: 0.86rem;
+}
+
+.sensitive-note {
+  max-width: 72ch;
+  margin-top: 1rem;
+  padding: 0.85rem 0.95rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: #fff7ed;
+  color: #7c2d12;
+  font-size: 0.92rem;
 }
 
 .weekly-grid {
@@ -1203,6 +1259,10 @@ textarea {
   margin: 0.2rem 0;
 }
 
+.footer-grid .legal-disclosure {
+  max-width: 72ch;
+}
+
 .footer-nav {
   display: flex;
   gap: 0.6rem;
@@ -1339,9 +1399,10 @@ textarea {
 
   .nav-links {
     position: absolute;
-    top: calc(var(--header-h) + 6px);
+    top: calc((var(--header-h) * 2) + 12px);
     right: 0.7rem;
     left: 0.7rem;
+    z-index: 4;
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 12px;
@@ -1370,6 +1431,10 @@ textarea {
   .form-row,
   .weekly-input-grid,
   .service-lanes {
+    grid-template-columns: 1fr;
+  }
+
+  .checkbox-grid {
     grid-template-columns: 1fr;
   }
 

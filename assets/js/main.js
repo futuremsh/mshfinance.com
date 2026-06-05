@@ -101,7 +101,22 @@
   const params = new URLSearchParams(window.location.search);
   const tool = params.get('tool');
   const message = document.getElementById('message');
-  const serviceInterest = document.getElementById('service_interest');
+  const serviceInterestFields = Array.from(document.querySelectorAll('input[name="service_interest"]'));
+  const serviceInterestGroup = document.querySelector('[data-service-interest-group]');
+
+  function validateServiceInterest() {
+    if (!serviceInterestFields.length) return true;
+    const hasSelection = serviceInterestFields.some(function (field) {
+      return field.checked;
+    });
+    serviceInterestFields.forEach(function (field) {
+      field.setCustomValidity(hasSelection ? '' : 'Please select at least one service interest.');
+    });
+    if (serviceInterestGroup) {
+      serviceInterestGroup.classList.toggle('error-field', !hasSelection);
+    }
+    return hasSelection;
+  }
 
   if (tool && message) {
     const toolLabels = {
@@ -115,23 +130,34 @@
       'I used the ' +
       (toolLabels[tool] || 'website calculator') +
       ' and would like to talk to a CPA.';
-    if (serviceInterest) {
+    if (serviceInterestFields.length) {
+      let selectedValue;
       if (tool === 'sales-tax') {
-        serviceInterest.value = 'sales_tax';
+        selectedValue = 'sales_tax';
       } else if (tool === 'tax-notice') {
-        serviceInterest.value = 'tax_notice';
+        selectedValue = 'tax_notice';
       } else if (tool === 'ptet-bait') {
-        serviceInterest.value = 'ptet_bait';
+        selectedValue = 'ptet_bait';
       } else {
-        serviceInterest.value = tool === 'cash-flow' ? 'cfo' : 'tax';
+        selectedValue = tool === 'cash-flow' ? 'cfo' : 'tax';
       }
+      serviceInterestFields.forEach(function (field) {
+        field.checked = field.value === selectedValue;
+      });
+      validateServiceInterest();
     }
   }
+
+  serviceInterestFields.forEach(function (field) {
+    field.addEventListener('change', validateServiceInterest);
+  });
 
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
     statusEl.className = 'form-status';
     statusEl.hidden = false;
+
+    validateServiceInterest();
 
     if (!form.checkValidity()) {
       form.reportValidity();
