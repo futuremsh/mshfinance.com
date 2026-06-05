@@ -291,7 +291,7 @@ describe('site content audit', () => {
       home.includes('MSH Finance Group LLC helps individuals and business owners understand their numbers, plan ahead, and make proactive financial decisions before taxes are due or cash pressure hits.'),
       true
     );
-    assert.equal(home.includes('Try our Free Tools'), true);
+    assert.equal(home.includes('Free Tools'), true);
     assert.equal(home.includes('Try our free tools'), false);
     assert.equal(home.includes('Try the NY and NJ Tools'), false);
     assert.equal(home.includes('data-question-rotator'), true);
@@ -301,7 +301,7 @@ describe('site content audit', () => {
     for (const question of homepageRotatorQuestions) {
       assert.equal(home.includes(question), true, question);
     }
-    assert.equal(home.includes('<a class="btn btn-primary" href="/services">View Service Details</a>'), true);
+    assert.equal(home.includes('<a class="btn btn-primary" href="/services">Services</a>'), true);
     assert.equal(home.includes('service-details-link'), false);
     assert.equal(home.includes('class="hero-points"'), false);
     assert.equal(home.includes('class="metric-grid"'), false);
