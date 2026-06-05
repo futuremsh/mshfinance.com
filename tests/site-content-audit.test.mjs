@@ -11,7 +11,7 @@ const educationalDisclaimer =
 const resourcesDescription =
   'Free tax, cash flow, and compliance screening tools for NY and NJ business owners and individuals.';
 const cpaFirmDisclosure =
-  'MSH Finance Group LLC is a tax, accounting and advisory firm. While individual members or employees of MSH Finance Group LLC may hold individual Certified Public Accountant (CPA) licenses in NY and/or NJ, MSH Finance Group LLC is not registered as a CPA firm in NJ and does not offer attest services (e.g. audits or review engagements).';
+  'MSH Finance Group LLC is a tax, accounting and advisory firm. While individual members or employees of MSH Finance Group LLC may hold individual Certified Public Accountant (CPA) licenses in NY and/or NJ, MSH Finance Group LLC is not registered as a CPA firm and does not offer attest services (e.g. audits or review engagements).';
 const mailchimpEnvVars = [
   'MAILCHIMP_API_KEY',
   'MAILCHIMP_SERVER_PREFIX',
@@ -130,10 +130,10 @@ describe('site content audit', () => {
   it('shows approved partner bios on the about page', async () => {
     const about = await readRelative('about.html');
     assert.equal(about.includes('Meet Jacqueline Srour and Morris Shalom'), true);
-    assert.equal(about.includes('<h1>Expert guidance for decisions that need context</h1>'), true);
+    assert.equal(about.includes('<h1>What do you get from a CPA and a CPA/JD with nearly four decades of experience? Clarity.</h1>'), true);
     assert.equal(about.includes('brings tax, accounting, compliance, and operating finance experience together'), true);
     assert.equal(about.includes('CPA-led guidance for New York and New Jersey'), false);
-    assert.equal(about.includes('<h2>Without Further Ado, Meet the Leadership Team</h2>'), true);
+    assert.equal(about.includes('<h2>Meet the Partners</h2>'), true);
     assert.equal(about.includes('<h2>Partner Bios</h2>'), false);
     assert.equal(about.includes('Partner-led guidance for decisions that need context'), false);
     assert.equal(about.includes('<h3>Jacqueline Srour</h3>'), true);
@@ -148,7 +148,7 @@ describe('site content audit', () => {
     assert.equal(services.includes('MSH works with clients across the country for fractional CFO and advisory services, bookkeeping, and federal tax matters.'), true);
     assert.equal(services.includes('This site is now focused on'), false);
     assert.equal(services.includes('<section class="page-hero services-hero section">'), true);
-    assert.equal(services.includes('<h1>Services that turn financial details into better decisions</h1>'), true);
+    assert.equal(services.includes('<h1>Expertise that turns financial detail into smart decisions.</h1>'), true);
     assert.equal(services.includes('use financial information before decisions get expensive'), true);
     assert.equal(services.includes('Services for New York and'), false);
 
