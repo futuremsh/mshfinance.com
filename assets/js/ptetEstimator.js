@@ -8,6 +8,19 @@
     '/config/2026/nj-bait.json',
     '/config/2026/ptet-tool.json'
   ];
+  const RESULT_OPTIONS = {
+    recommendation: ['Needs CPA review', 'Likely beneficial (estimate)', 'Likely not beneficial (estimate)'],
+    confidence: ['Low', 'Medium', 'High'],
+    complexity: ['Simple', 'Moderate', 'Complex'],
+    regimes: ['NY PTET', 'NYC PTET', 'NJ BAIT']
+  };
+  const FALLBACK_CONFIDENCE_REASONS = ['Known ownership facts.', 'Known residency/sourcing inputs.', 'Known QBI response.'];
+  const FALLBACK_CHANGE_FACTORS = [
+    'Owner residency and sourcing details.',
+    'Special allocations, guaranteed payments, or tiered ownership.',
+    'QBI deduction treatment and SSTB status.',
+    'Current-year election/payment deadlines and cash flow.'
+  ];
   const moneyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
   function $(selector, root) {
@@ -317,20 +330,164 @@
     }
   }
 
+  function finiteAmount(value) {
+    const parsed = Number(value);
+    if (!Number.isFinite(parsed)) return 0;
+    return Math.max(0, Math.min(parsed, 1000000000));
+  }
+
+  function knownValue(value, options) {
+    return options.includes(value) ? value : '';
+  }
+
+  function cleanResultText(value, maxLength) {
+    if (typeof value !== 'string') return '';
+    const text = value.replace(/[\u0000-\u001f\u007f]/g, ' ').trim();
+    if (!text || /[<>]/.test(text)) return '';
+    return text.slice(0, maxLength);
+  }
+
+  function cleanTextList(values, fallback) {
+    if (!Array.isArray(values)) return fallback.slice();
+    const cleaned = values.map(function (value) {
+      return cleanResultText(value, 180);
+    }).filter(Boolean).slice(0, 5);
+    return cleaned.length ? cleaned : fallback.slice();
+  }
+
+  function normalizeSavedEstimate(saved) {
+    if (!saved || typeof saved !== 'object' || !saved.result || typeof saved.result !== 'object') {
+      return null;
+    }
+
+    const result = saved.result;
+    const recommendation = knownValue(result.recommendation, RESULT_OPTIONS.recommendation);
+    const confidence = knownValue(result.confidence, RESULT_OPTIONS.confidence);
+    const complexity = knownValue(result.complexity, RESULT_OPTIONS.complexity);
+    const savingsRange = result.savingsRange && typeof result.savingsRange === 'object' ? result.savingsRange : null;
+
+    if (!recommendation || !confidence || !complexity || !savingsRange) {
+      return null;
+    }
+
+    return {
+      result: {
+        recommendation,
+        confidence,
+        confidenceReasons: cleanTextList(result.confidenceReasons, FALLBACK_CONFIDENCE_REASONS),
+        complexity,
+        savingsRange: {
+          low: finiteAmount(savingsRange.low),
+          high: finiteAmount(savingsRange.high)
+        },
+        pointEstimate: finiteAmount(result.pointEstimate),
+        marginalRate: finiteAmount(result.marginalRate),
+        saltCap: finiteAmount(result.saltCap),
+        entityTax: finiteAmount(result.entityTax),
+        qbiGiveback: finiteAmount(result.qbiGiveback),
+        relevantRegimes: Array.isArray(result.relevantRegimes)
+          ? result.relevantRegimes.filter(function (regime) {
+            return RESULT_OPTIONS.regimes.includes(regime);
+          }).slice(0, RESULT_OPTIONS.regimes.length)
+          : [],
+        whatCouldChange: cleanTextList(result.whatCouldChange, FALLBACK_CHANGE_FACTORS)
+      }
+    };
+  }
+
   function loadEstimate() {
     try {
       const hashMatch = window.location.hash.match(/estimate=([^&]+)/);
       if (hashMatch) {
-        const fromHash = decodeEstimate(hashMatch[1]);
+        const fromHash = normalizeSavedEstimate(decodeEstimate(hashMatch[1]));
         if (fromHash) {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(fromHash));
           return fromHash;
         }
       }
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      return normalizeSavedEstimate(JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'));
     } catch (error) {
       return null;
     }
+  }
+
+  function appendText(parent, tagName, text, className) {
+    const element = document.createElement(tagName);
+    if (className) element.className = className;
+    element.textContent = text;
+    parent.appendChild(element);
+    return element;
+  }
+
+  function appendMetric(list, label, value) {
+    const item = document.createElement('li');
+    const strong = document.createElement('strong');
+    strong.textContent = label + ':';
+    item.appendChild(strong);
+    item.appendChild(document.createTextNode(' ' + value));
+    list.appendChild(item);
+  }
+
+  function appendTextList(parent, heading, items) {
+    appendText(parent, 'h3', heading);
+    const list = document.createElement('ul');
+    list.className = 'outcome-list';
+    items.forEach(function (item) {
+      appendText(list, 'li', item);
+    });
+    parent.appendChild(list);
+  }
+
+  function renderSavedResult(mount, saved) {
+    const result = saved.result;
+    const prominent = result.confidence === 'Low' || result.recommendation === 'Needs CPA review';
+    const beneficial = result.recommendation.indexOf('Likely beneficial') === 0;
+    const section = document.createElement('section');
+    section.className = 'result-card';
+
+    const resultHead = document.createElement('div');
+    resultHead.className = 'result-head';
+    appendText(resultHead, 'h2', result.recommendation);
+    appendText(resultHead, 'span', result.confidence + ' confidence', 'risk-badge risk-' + (prominent ? 'critical' : beneficial ? 'high' : 'medium'));
+    section.appendChild(resultHead);
+
+    const metrics = document.createElement('ul');
+    metrics.className = 'calc-breakdown';
+    appendMetric(metrics, 'Estimated federal savings range', money(result.savingsRange.low) + ' - ' + money(result.savingsRange.high));
+    appendMetric(metrics, 'Complexity meter', result.complexity);
+    appendMetric(metrics, 'Estimated entity-level PTET/BAIT expense', money(result.entityTax));
+    appendMetric(metrics, 'QBI give-back estimate', money(result.qbiGiveback));
+    appendMetric(metrics, 'Regimes indicated', result.relevantRegimes.join(', ') || 'None obvious');
+    section.appendChild(metrics);
+
+    appendTextList(section, 'Top confidence reasons', result.confidenceReasons);
+    appendTextList(section, 'What could change this result', result.whatCouldChange);
+    appendText(section, 'h3', 'What we did / what we did not do');
+    appendText(section, 'p', 'We modeled a simplified federal baseline versus entity-level PTET/BAIT expense using 2026 config assumptions. We did not perform a full state return calculation, basis analysis, QBI limitation analysis, or formal election recommendation.');
+
+    const ctaStrip = document.createElement('div');
+    ctaStrip.className = 'cta-strip';
+    const contactLink = document.createElement('a');
+    contactLink.className = 'btn btn-primary';
+    contactLink.href = '/contact';
+    contactLink.textContent = 'Talk to a CPA';
+    ctaStrip.appendChild(contactLink);
+    const saveButton = document.createElement('button');
+    saveButton.className = 'btn btn-secondary';
+    saveButton.type = 'button';
+    saveButton.setAttribute('data-save-result', '');
+    saveButton.textContent = 'Save my results';
+    ctaStrip.appendChild(saveButton);
+    const printButton = document.createElement('button');
+    printButton.className = 'btn btn-secondary';
+    printButton.type = 'button';
+    printButton.setAttribute('data-print-result', '');
+    printButton.textContent = 'Print result';
+    ctaStrip.appendChild(printButton);
+    section.appendChild(ctaStrip);
+
+    mount.textContent = '';
+    mount.appendChild(section);
   }
 
   function renderEntityRows(container, count, advanced) {
@@ -391,49 +548,34 @@
       mount.innerHTML = '<div class="result-card"><h2>No saved estimate yet</h2><p>Start with the quick estimator, then return here for results.</p><a class="btn btn-primary" href="/ptet/">Start Quick Mode</a></div>';
       return;
     }
-    const result = saved.result;
-    const prominent = result.confidence === 'Low' || result.recommendation === 'Needs CPA review';
-    const beneficial = result.recommendation.indexOf('Likely beneficial') === 0;
-    mount.innerHTML =
-      '<section class="result-card">' +
-      '<div class="result-head"><h2>' + result.recommendation + '</h2><span class="risk-badge risk-' + (prominent ? 'critical' : beneficial ? 'high' : 'medium') + '">' + result.confidence + ' confidence</span></div>' +
-      '<ul class="calc-breakdown">' +
-      '<li><strong>Estimated federal savings range:</strong> ' + money(result.savingsRange.low) + ' - ' + money(result.savingsRange.high) + '</li>' +
-      '<li><strong>Complexity meter:</strong> ' + result.complexity + '</li>' +
-      '<li><strong>Estimated entity-level PTET/BAIT expense:</strong> ' + money(result.entityTax) + '</li>' +
-      '<li><strong>QBI give-back estimate:</strong> ' + money(result.qbiGiveback) + '</li>' +
-      '<li><strong>Regimes indicated:</strong> ' + (result.relevantRegimes.join(', ') || 'None obvious') + '</li>' +
-      '</ul>' +
-      '<h3>Top confidence reasons</h3><ul class="outcome-list"><li>' + result.confidenceReasons.join('</li><li>') + '</li></ul>' +
-      '<h3>What could change this result</h3><ul class="outcome-list"><li>' + result.whatCouldChange.join('</li><li>') + '</li></ul>' +
-      '<h3>What we did / what we did not do</h3><p>We modeled a simplified federal baseline versus entity-level PTET/BAIT expense using 2026 config assumptions. We did not perform a full state return calculation, basis analysis, QBI limitation analysis, or formal election recommendation.</p>' +
-      '<div class="cta-strip"><a class="btn btn-primary" href="/contact">Talk to a CPA</a><button class="btn btn-secondary" type="button" data-save-result>Save my results</button><button class="btn btn-secondary" type="button" data-print-result>Print result</button></div>' +
-      '</section>';
+    renderSavedResult(mount, saved);
 
     const packageForm = $('[data-report-package]');
     const status = $('[data-report-status]');
-    packageForm.addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (!packageForm.checkValidity()) {
-        packageForm.reportValidity();
-        return;
-      }
-      const consent = validateReportConsent(
-        $('[name="email"]', packageForm).value,
-        $('[name="reportConsent"]', packageForm).checked,
-        $('[name="marketingConsent"]', packageForm).checked
-      );
-      if (!consent.valid) {
+    if (packageForm && status) {
+      packageForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!packageForm.checkValidity()) {
+          packageForm.reportValidity();
+          return;
+        }
+        const consent = validateReportConsent(
+          $('[name="email"]', packageForm).value,
+          $('[name="reportConsent"]', packageForm).checked,
+          $('[name="marketingConsent"]', packageForm).checked
+        );
+        if (!consent.valid) {
+          status.hidden = false;
+          status.className = 'form-status error';
+          status.textContent = consent.message;
+          return;
+        }
+        // TODO: Send report email via transactional provider. Store only email, consent flags, timestamp, and source.
         status.hidden = false;
-        status.className = 'form-status error';
-        status.textContent = consent.message;
-        return;
-      }
-      // TODO: Send report email via transactional provider. Store only email, consent flags, timestamp, and source.
-      status.hidden = false;
-      status.className = 'form-status success';
-      status.textContent = 'Report package request validated locally. Connect email provider to send the branded PDF package.';
-    });
+        status.className = 'form-status success';
+        status.textContent = 'Report package request validated locally. Connect email provider to send the branded PDF package.';
+      });
+    }
     mount.addEventListener('click', function (event) {
       if (event.target.matches('[data-save-result]')) {
         const encoded = encodeEstimate(saved);
@@ -473,6 +615,8 @@
     calcProgressiveTax,
     validateConfigShape,
     validateReportConsent,
+    normalizeSavedEstimate,
+    loadEstimate,
     estimatePTET,
     initWizard,
     initResults

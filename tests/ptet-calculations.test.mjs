@@ -141,6 +141,48 @@ test('downgrades confidence for complex ownership and unknown QBI', () => {
   assert.equal(complex.recommendation, 'Needs CPA review');
 });
 
+test('rejects crafted PTET result links before storing saved estimate data', () => {
+  const malicious = {
+    result: {
+      recommendation: '<img src=x onerror=alert(1)>',
+      confidence: 'High',
+      complexity: 'Simple',
+      savingsRange: { low: 1, high: 2 },
+      entityTax: 0,
+      qbiGiveback: 0,
+      relevantRegimes: ['NY PTET'],
+      confidenceReasons: ['Known ownership facts.'],
+      whatCouldChange: ['Owner residency and sourcing details.']
+    }
+  };
+  const encoded = Buffer.from(JSON.stringify(malicious), 'utf8').toString('base64');
+  let stored = null;
+
+  context.window.location.hash = '#estimate=' + encoded;
+  context.localStorage = {
+    getItem() { return null; },
+    setItem(key, value) { stored = { key, value }; }
+  };
+
+  assert.equal(estimator.loadEstimate(), null);
+  assert.equal(stored, null);
+  context.window.location.hash = '';
+});
+
+test('normalizes saved PTET estimate text before result rendering', () => {
+  const result = estimator.estimatePTET(baseInputs(), config);
+  result.confidenceReasons = ['Known ownership facts.', '<img src=x onerror=alert(1)>'];
+  result.whatCouldChange = ['<svg onload=alert(1)>', 'QBI deduction treatment and SSTB status.'];
+  result.relevantRegimes = ['NY PTET', '<script>alert(1)</script>'];
+
+  const normalized = estimator.normalizeSavedEstimate({ result });
+
+  assert.equal(normalized.result.recommendation, result.recommendation);
+  assert.deepEqual(normalized.result.confidenceReasons, ['Known ownership facts.']);
+  assert.deepEqual(normalized.result.whatCouldChange, ['QBI deduction treatment and SSTB status.']);
+  assert.deepEqual(normalized.result.relevantRegimes, ['NY PTET']);
+});
+
 test('separates report consent from marketing consent', () => {
   assert.equal(estimator.validateReportConsent('owner@example.com', true, false).canSendReport, true);
   assert.equal(estimator.validateReportConsent('owner@example.com', true, false).canSendMarketing, false);
